@@ -12,6 +12,7 @@
     "importOrder": [
         "^react.*$",
         "<THIRD_PARTY_MODULES>",
+        "^@ui-kitten/(.*)$",
         "^@reddit/(.*)$",
         "^../.*$",
         "^./.*$"
