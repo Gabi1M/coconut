@@ -1,19 +1,10 @@
 import React from 'react';
-import { Layout, Text, Button } from '@ui-kitten/components';
-import { useNavigation } from '@react-navigation/native';
-/* eslint-disable-next-line no-restricted-imports */
-import { MainRoutes } from '@reddit/navigation/types';
+import { Layout, Text } from '@ui-kitten/components';
 
-const HomeScreen = () => {
-    const navigation = useNavigation();
-    return (
-        <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <Text category='h1'>HOME</Text>
-            <Button onPress={() => navigation.navigate(MainRoutes.LOGIN as never)}>
-                Go to login
-            </Button>
-        </Layout>
-    );
-};
+const HomeScreen = () => (
+    <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Text category='h1'>HOME</Text>
+    </Layout>
+);
 
 export default HomeScreen;

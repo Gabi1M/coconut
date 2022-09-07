@@ -10,8 +10,8 @@ const noHeaderOptions = {
 };
 
 const MainNavigator = () => (
-    <Stack.Navigator>
-        <Stack.Screen name={MainRoutes.HOME} component={HomeScreen} />
+    <Stack.Navigator initialRouteName={MainRoutes.LOGIN}>
+        <Stack.Screen name={MainRoutes.HOME} component={HomeScreen} options={noHeaderOptions} />
         <Stack.Screen name={MainRoutes.LOGIN} component={LoginScreen} options={noHeaderOptions} />
         <Stack.Screen
             name={MainRoutes.REGISTER}

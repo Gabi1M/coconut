@@ -2,15 +2,13 @@ import React from 'react';
 import { Button, Input, Text } from '@ui-kitten/components';
 import { ImageBackground, StyleSheet, TouchableOpacity } from 'react-native';
 import { Background } from '@reddit/images';
-import { useNavigation } from '@react-navigation/native';
-import { MainRoutes } from '@reddit/navigation';
+import { MainRoutes, useNavigation } from '@reddit/navigation';
 
 const LoginScreen = () => {
     const navigation = useNavigation();
 
-    const onLogin = () => null;
-
-    const onRegister = () => navigation.navigate(MainRoutes.REGISTER as never);
+    const onLogin = () => navigation.navigate(MainRoutes.HOME);
+    const onRegister = () => navigation.navigate(MainRoutes.REGISTER);
 
     return (
         <ImageBackground style={styles.root} source={Background}>
