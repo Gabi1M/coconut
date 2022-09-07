@@ -1,9 +1,9 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { MainRoutes } from './types';
+import { MainRoutes, RootStackParamList } from './types';
 import { HomeScreen, LoginScreen, RegisterScreen } from '@reddit/screens';
 
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const noHeaderOptions = {
     headerShown: false,
