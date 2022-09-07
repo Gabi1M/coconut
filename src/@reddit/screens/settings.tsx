@@ -1,6 +1,8 @@
 import React from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
+
 import { Icon, Layout, Text } from '@ui-kitten/components';
+
 import { useNavigateToLogin } from '@reddit/navigation';
 
 const SettingsScreen = () => {

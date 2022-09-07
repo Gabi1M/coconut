@@ -1,8 +1,11 @@
 import React from 'react';
+
 import * as eva from '@eva-design/eva';
-import { EvaIconsPack } from '@ui-kitten/eva-icons';
-import { ApplicationProvider, IconRegistry } from '@ui-kitten/components';
 import { NavigationContainer } from '@react-navigation/native';
+
+import { ApplicationProvider, IconRegistry } from '@ui-kitten/components';
+import { EvaIconsPack } from '@ui-kitten/eva-icons';
+
 import { StackNavigator } from '@reddit/navigation';
 
 const App = () => (

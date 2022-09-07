@@ -1,6 +1,8 @@
 import React from 'react';
-import { Button, Input, Text } from '@ui-kitten/components';
 import { ImageBackground, StyleSheet, TouchableOpacity } from 'react-native';
+
+import { Button, Input, Text } from '@ui-kitten/components';
+
 import { Background } from '@reddit/images';
 import { useNavigateToFeed, useNavigateToRegister } from '@reddit/navigation';
 

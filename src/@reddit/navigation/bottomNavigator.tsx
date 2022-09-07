@@ -1,4 +1,9 @@
+import React from 'react';
+
 import { BottomTabBarProps, createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+import { BottomNavigation, BottomNavigationTab, Icon } from '@ui-kitten/components';
+
 import {
     FeedScreen,
     InboxScreen,
@@ -6,10 +11,9 @@ import {
     SearchScreen,
     SettingsScreen,
 } from '@reddit/screens';
-import React from 'react';
+
 import { BottomRoutes, BottomTabParamList } from './types';
 import { noHeaderOptions } from './utils';
-import { BottomNavigation, BottomNavigationTab, Icon } from '@ui-kitten/components';
 
 const Tab = createBottomTabNavigator<BottomTabParamList>();
 

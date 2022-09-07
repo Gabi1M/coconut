@@ -1,7 +1,10 @@
 import React from 'react';
+
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { StackRoutes, StackParamList } from './types';
+
 import { HomeScreen, LoginScreen, RegisterScreen } from '@reddit/screens';
+
+import { StackParamList, StackRoutes } from './types';
 import { noHeaderOptions } from './utils';
 
 const Stack = createNativeStackNavigator<StackParamList>();
