@@ -2,22 +2,20 @@ import React from 'react';
 import { Button, Input, Text } from '@ui-kitten/components';
 import { ImageBackground, StyleSheet, TouchableOpacity } from 'react-native';
 import { Background } from '@reddit/images';
-import { MainRoutes, useNavigation } from '@reddit/navigation';
+import { useNavigateToFeed, useNavigateToRegister } from '@reddit/navigation';
 
 const LoginScreen = () => {
-    const navigation = useNavigation();
-
-    const onLogin = () => navigation.navigate(MainRoutes.HOME);
-    const onRegister = () => navigation.navigate(MainRoutes.REGISTER);
+    const navigateToFeed = useNavigateToFeed();
+    const navigateToRegister = useNavigateToRegister();
 
     return (
         <ImageBackground style={styles.root} source={Background}>
             <Input style={styles.input} placeholder='Email' />
             <Input style={styles.input} placeholder='Password' secureTextEntry />
-            <Button style={styles.button} onPress={onLogin}>
+            <Button style={styles.button} onPress={navigateToFeed}>
                 Continue
             </Button>
-            <TouchableOpacity onPress={onRegister}>
+            <TouchableOpacity onPress={navigateToRegister}>
                 <Text style={styles.register} category='c1'>
                     Create an account
                 </Text>
