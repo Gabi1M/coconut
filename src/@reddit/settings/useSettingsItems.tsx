@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { AsyncStorage, AsyncStorageKeys } from '@reddit/asyncStorage';
 import { useNavigateToLogin } from '@reddit/navigation';
 
 export interface SettingsItem {
@@ -17,7 +18,10 @@ const useSettingsItems = (): SettingsItem[] => {
             title: 'Logout',
             description: 'Logout of your account',
             icon: 'person',
-            onPress: navigateToLogin,
+            onPress: async () => {
+                await AsyncStorage.removeValue(AsyncStorageKeys.ACCESS_TOKEN);
+                navigateToLogin();
+            },
         },
     ];
 };

@@ -1,5 +1,5 @@
 export { default as LoginScreen } from './login';
-export { default as RegisterScreen } from './register';
+export { default as LoginWebviewScreen } from './loginWebview';
 export { default as HomeScreen } from './home';
 export { default as FeedScreen } from './feed';
 export { default as InboxScreen } from './inbox';

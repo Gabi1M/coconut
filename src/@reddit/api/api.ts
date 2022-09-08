@@ -1,4 +1,7 @@
 /* eslint-disable no-restricted-imports */
+import { Buffer } from '@craftzdog/react-native-buffer';
+
+import { RedditInfo } from '@reddit/info';
 import { AccessToken } from '@reddit/models';
 import {
     Resource,
@@ -27,12 +30,15 @@ export class Api {
     }
 
     private getHeaders() {
-        if (!this.accessToken) {
-            return undefined;
+        if (this.accessToken) {
+            return {
+                Authorization: `Bearer ${this.accessToken}`,
+            };
         }
 
+        const credentials = Buffer.from(`${RedditInfo.clientId}:`).toString('base64');
         return {
-            Authorization: `Bearer ${this.accessToken}`,
+            Authorization: `Basic ${credentials}`,
         };
     }
 
@@ -59,12 +65,12 @@ export class Api {
         return (await response.text()) as unknown as T;
     }
 
-    private async postJSON<T>(url: string, data: string) {
+    private async postJSON<T>(url: string, data: string, customContentType?: string) {
         const response = await fetch(url, {
             method: RequestMethod.POST,
             headers: {
                 ...this.getHeaders(),
-                'content-type': 'application/json',
+                'Content-Type': customContentType ?? 'application/json',
             },
             body: data,
         });
@@ -137,6 +143,7 @@ export class Api {
         return this.postJSON<AccessToken>(
             'https://www.reddit.com/api/v1/access_token',
             data.toString(),
+            'application/x-www-form-urlencoded',
         );
     }
 
@@ -156,7 +163,7 @@ export class Api {
 
     async setResource<T extends Resource = Resource>(
         resourceName: T,
-        params?: ResourceSetParams[T],
+        params?: ResourceSetParams[T], // eslint-disable-line @typescript-eslint/no-unused-vars
     ) {
         switch (resourceName) {
             default: {
@@ -167,7 +174,7 @@ export class Api {
 
     async deleteResource<T extends Resource = Resource>(
         resourceName: T,
-        params: ResourceDeleteParams[T],
+        params: ResourceDeleteParams[T], // eslint-disable-line @typescript-eslint/no-unused-vars
     ) {
         switch (resourceName) {
             default: {

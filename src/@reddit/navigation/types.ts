@@ -5,7 +5,7 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 export enum StackRoutes {
     HOME = 'Home',
     LOGIN = 'Login',
-    REGISTER = 'Register',
+    LOGIN_WEBVIEW = 'Login_Webview',
 }
 
 export enum BottomRoutes {
@@ -19,7 +19,7 @@ export enum BottomRoutes {
 export type StackParamList = {
     [StackRoutes.HOME]: NavigatorScreenParams<BottomTabParamList>;
     [StackRoutes.LOGIN]: undefined;
-    [StackRoutes.REGISTER]: undefined;
+    [StackRoutes.LOGIN_WEBVIEW]: undefined;
 };
 
 export type BottomTabParamList = {
@@ -33,7 +33,7 @@ export type BottomTabParamList = {
 export type StackScreenProps = {
     [StackRoutes.HOME]: NativeStackScreenProps<StackParamList, StackRoutes.HOME>;
     [StackRoutes.LOGIN]: NativeStackScreenProps<StackParamList, StackRoutes.LOGIN>;
-    [StackRoutes.REGISTER]: NativeStackScreenProps<StackParamList, StackRoutes.REGISTER>;
+    [StackRoutes.LOGIN_WEBVIEW]: NativeStackScreenProps<StackParamList, StackRoutes.LOGIN_WEBVIEW>;
 };
 
 export type BottomScreenProps = {

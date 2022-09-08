@@ -9,9 +9,9 @@ export const useNavigateToLogin = () => {
     return () => navigation.navigate(StackRoutes.LOGIN);
 };
 
-export const useNavigateToRegister = () => {
+export const useNavigateToLoginWebview = () => {
     const navigation = useNavigation();
-    return () => navigation.navigate(StackRoutes.REGISTER);
+    return () => navigation.navigate(StackRoutes.LOGIN_WEBVIEW);
 };
 
 export const useNavigateToFeed = () => {

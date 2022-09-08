@@ -1,27 +1,21 @@
 import React from 'react';
-import { ImageBackground, StyleSheet, TouchableOpacity } from 'react-native';
+import { ImageBackground, StyleSheet } from 'react-native';
 
-import { Button, Input, Text } from '@ui-kitten/components';
+import { Button, Text } from '@ui-kitten/components';
 
 import { Background } from '@reddit/images';
-import { useNavigateToFeed, useNavigateToRegister } from '@reddit/navigation';
+import { useNavigateToLoginWebview } from '@reddit/navigation';
 
 const LoginScreen = () => {
-    const navigateToFeed = useNavigateToFeed();
-    const navigateToRegister = useNavigateToRegister();
+    const navigateToLogin = useNavigateToLoginWebview();
 
     return (
         <ImageBackground style={styles.root} source={Background}>
-            <Input style={styles.input} placeholder='Email' />
-            <Input style={styles.input} placeholder='Password' secureTextEntry />
-            <Button style={styles.button} onPress={navigateToFeed}>
-                Continue
+            <Button style={styles.signInButton} onPress={navigateToLogin}>
+                Sign in with Reddit
             </Button>
-            <TouchableOpacity onPress={navigateToRegister}>
-                <Text style={styles.register} category='c1'>
-                    Create an account
-                </Text>
-            </TouchableOpacity>
+            <Text>or</Text>
+            <Button style={styles.createAccountButton}>Create an account</Button>
         </ImageBackground>
     );
 };
@@ -33,16 +27,15 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingHorizontal: 10,
     },
-    input: {
-        marginVertical: 5,
-    },
-    button: {
+    signInButton: {
         marginVertical: 5,
         width: '100%',
     },
-    register: {
+    createAccountButton: {
         marginVertical: 5,
-        color: 'aqua',
+        width: '100%',
+        backgroundColor: 'purple',
+        borderColor: 'purple',
     },
 });
 

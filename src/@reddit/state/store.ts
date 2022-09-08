@@ -3,10 +3,11 @@ import createSagaMiddleware from 'redux-saga';
 
 import { accessTokenReducer, accessTokenSaga } from '@reddit/accessToken';
 
+import { startupSaga } from './startupSaga';
 import { GlobalState } from './types';
 
 export const createStore = () => {
-    const appSagas = [accessTokenSaga];
+    const appSagas = [accessTokenSaga, startupSaga];
 
     const sagaMiddleware = createSagaMiddleware();
     const store = createReduxStore(

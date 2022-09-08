@@ -1,9 +1,26 @@
-import { takeLatest } from 'redux-saga/effects';
+import { apply, call, delay, select, takeLatest } from 'redux-saga/effects';
 
-import { Resource, createResourceFetchSaga } from '@reddit/resource';
+import { AsyncStorage, AsyncStorageKeys } from '@reddit/asyncStorage';
+import { AccessToken } from '@reddit/models';
+import { navigateToFeed } from '@reddit/navigation';
+import { Resource, ResourceFetchAction, createResourceFetchSaga } from '@reddit/resource';
 
 import { AccessTokenActions } from './reducer';
+import { selectAccessToken } from './selectors';
+
+function* fetchAccessTokenSaga(action: ResourceFetchAction<Resource.ACCESS_TOKEN>) {
+    yield call(createResourceFetchSaga(Resource.ACCESS_TOKEN), action);
+    yield delay(1000);
+    const accessToken: AccessToken | undefined = yield select(selectAccessToken);
+    if (accessToken) {
+        yield apply(AsyncStorage, AsyncStorage.setValue, [
+            AsyncStorageKeys.ACCESS_TOKEN,
+            accessToken,
+        ]);
+        yield call(navigateToFeed);
+    }
+}
 
 export function* accessTokenSaga() {
-    yield takeLatest(AccessTokenActions.FETCH, createResourceFetchSaga(Resource.ACCESS_TOKEN));
+    yield takeLatest(AccessTokenActions.FETCH, fetchAccessTokenSaga);
 }
