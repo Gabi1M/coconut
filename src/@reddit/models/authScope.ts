@@ -6,7 +6,7 @@ export enum AuthScope {
     MODCONFIG = 'modconfig',
     MODFLAIR = 'modflair',
     MODLOG = 'modlog',
-    MODPOST = 'modpost',
+    MODPOSTS = 'modposts',
     MODWIKI = 'modwiki',
     MYSUBREDDITS = 'mysubreddits',
     PRIVATEMESSAGES = 'privatemessages',
