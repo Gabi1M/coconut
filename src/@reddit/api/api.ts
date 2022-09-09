@@ -3,6 +3,7 @@ import { Buffer } from '@craftzdog/react-native-buffer';
 
 import { RedditInfo } from '@reddit/info';
 import { AccessToken, Profile } from '@reddit/models';
+import { ListingResult } from '@reddit/models/listing';
 import {
     Resource,
     ResourceDeleteParams,
@@ -151,6 +152,10 @@ export class Api {
         return this.getJSON<Profile>('https://oauth.reddit.com/api/v1/me');
     }
 
+    async fetchListings(params: ResourceFetchParams[Resource.LISTINGS]) {
+        return this.getJSON<ListingResult>(`https://oauth.reddit.com/${params.type}`);
+    }
+
     async fetchResource<T extends Resource = Resource>(
         resource: T,
         params?: ResourceFetchParams[T],
@@ -161,6 +166,9 @@ export class Api {
             }
             case Resource.PROFILE: {
                 return this.fetchProfile();
+            }
+            case Resource.LISTINGS: {
+                return this.fetchListings(params as ResourceFetchParams[Resource.LISTINGS]);
             }
             default: {
                 return undefined;

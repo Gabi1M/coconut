@@ -5,4 +5,5 @@ import { Resource } from '@reddit/resource/types';
 export interface GlobalState {
     accessToken: ResourceState<Resource.ACCESS_TOKEN>;
     profile: ResourceState<Resource.PROFILE>;
+    listings: ResourceState<Resource.LISTINGS>;
 }
