@@ -1,11 +1,21 @@
 import React from 'react';
+import { StyleSheet } from 'react-native';
 
-import { Layout, Text } from '@ui-kitten/components';
+import { Layout } from '@ui-kitten/components';
+
+import { ProfileBadge } from '@reddit/generic';
 
 const ProfileScreen = () => (
-    <Layout style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text category='h1'>PROFILE</Text>
+    <Layout style={styles.root}>
+        <ProfileBadge />
     </Layout>
 );
+
+const styles = StyleSheet.create({
+    root: {
+        flex: 1,
+        paddingHorizontal: 10,
+    },
+});
 
 export default ProfileScreen;

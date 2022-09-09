@@ -2,17 +2,19 @@ import { applyMiddleware, combineReducers, createStore as createReduxStore } fro
 import createSagaMiddleware from 'redux-saga';
 
 import { accessTokenReducer, accessTokenSaga } from '@reddit/accessToken';
+import { profileReducer, profileSaga } from '@reddit/profile';
 
 import { startupSaga } from './startupSaga';
 import { GlobalState } from './types';
 
 export const createStore = () => {
-    const appSagas = [accessTokenSaga, startupSaga];
+    const appSagas = [accessTokenSaga, profileSaga, startupSaga];
 
     const sagaMiddleware = createSagaMiddleware();
     const store = createReduxStore(
         combineReducers<GlobalState>({
             accessToken: accessTokenReducer,
+            profile: profileReducer,
         }),
         applyMiddleware(sagaMiddleware),
     );

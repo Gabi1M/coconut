@@ -13,10 +13,7 @@ const StackNavigator = () => (
     <Stack.Navigator screenOptions={noHeaderOptions} initialRouteName={StackRoutes.LOGIN}>
         <Stack.Screen name={StackRoutes.HOME} component={HomeScreen} />
         <Stack.Screen name={StackRoutes.LOGIN} component={LoginScreen} />
-        <Stack.Screen
-            name={StackRoutes.LOGIN_WEBVIEW}
-            component={LoginWebviewScreen}
-        />
+        <Stack.Screen name={StackRoutes.LOGIN_WEBVIEW} component={LoginWebviewScreen} />
     </Stack.Navigator>
 );
 

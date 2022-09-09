@@ -1,7 +1,9 @@
 /* eslint-disable no-restricted-imports */
-import { apply, put } from 'redux-saga/effects';
+import { apply, put, select } from 'redux-saga/effects';
 
+import { selectAccessToken } from '@reddit/accessToken/state/selectors';
 import { Api } from '@reddit/api';
+import { AccessToken } from '@reddit/models';
 
 import {
     ResourceSetAction,
@@ -12,7 +14,8 @@ import { Resource } from './types';
 
 export const createResourceSetSaga = <T extends Resource = Resource>(resourceName: T) => {
     function* setResource(action: ResourceSetAction<T>) {
-        const api = new Api();
+        const accessToken: AccessToken | undefined = yield select(selectAccessToken);
+        const api = new Api(accessToken?.access_token);
         try {
             yield apply(api, api.setResource, [resourceName, action.params]);
             yield put(createResourceSetSuccessAction(resourceName, action.params));
