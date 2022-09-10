@@ -14,6 +14,11 @@ export const useNavigateToLoginWebview = () => {
     return () => navigation.navigate(StackRoutes.LOGIN_WEBVIEW);
 };
 
+export const useNavigateToSubreddits = () => {
+    const navigation = useNavigation();
+    return () => navigation.navigate(StackRoutes.SUBREDDITS);
+};
+
 export const useNavigateToFeed = () => {
     const navigation = useNavigation();
     return () =>

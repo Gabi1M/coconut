@@ -6,6 +6,7 @@ export enum StackRoutes {
     HOME = 'Home',
     LOGIN = 'Login',
     LOGIN_WEBVIEW = 'Login_Webview',
+    SUBREDDITS = 'Subreddits',
 }
 
 export enum BottomRoutes {
@@ -20,6 +21,7 @@ export type StackParamList = {
     [StackRoutes.HOME]: NavigatorScreenParams<BottomTabParamList>;
     [StackRoutes.LOGIN]: undefined;
     [StackRoutes.LOGIN_WEBVIEW]: undefined;
+    [StackRoutes.SUBREDDITS]: undefined;
 };
 
 export type BottomTabParamList = {
@@ -34,6 +36,7 @@ export type StackScreenProps = {
     [StackRoutes.HOME]: NativeStackScreenProps<StackParamList, StackRoutes.HOME>;
     [StackRoutes.LOGIN]: NativeStackScreenProps<StackParamList, StackRoutes.LOGIN>;
     [StackRoutes.LOGIN_WEBVIEW]: NativeStackScreenProps<StackParamList, StackRoutes.LOGIN_WEBVIEW>;
+    [StackRoutes.SUBREDDITS]: NativeStackScreenProps<StackParamList, StackRoutes.SUBREDDITS>;
 };
 
 export type BottomScreenProps = {

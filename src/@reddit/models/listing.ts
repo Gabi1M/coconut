@@ -1,9 +1,3 @@
-interface MediaEmbed {}
-
-interface SecureMediaEmbed {}
-
-interface Gildings {}
-
 interface Source {
     url: string;
     width: number;
@@ -16,12 +10,9 @@ interface Resolution {
     height: number;
 }
 
-interface Variants {}
-
 interface Image {
     source: Source;
     resolutions: Resolution[];
-    variants: Variants;
     id: string;
 }
 
@@ -56,7 +47,6 @@ interface Data {
     author_flair_background_color?: any;
     ups: number;
     total_awards_received: number;
-    media_embed: MediaEmbed;
     thumbnail_width: number;
     author_flair_template_id?: any;
     is_original_content: boolean;
@@ -65,7 +55,6 @@ interface Data {
     is_reddit_media_domain: boolean;
     is_meta: boolean;
     category?: any;
-    secure_media_embed: SecureMediaEmbed;
     link_flair_text: string;
     can_mod_post: boolean;
     score: number;
@@ -76,7 +65,6 @@ interface Data {
     edited: boolean;
     author_flair_css_class?: any;
     author_flair_richtext: any[];
-    gildings: Gildings;
     post_hint: string;
     content_categories?: any;
     is_self: boolean;
@@ -100,7 +88,7 @@ interface Data {
     is_crosspostable: boolean;
     pinned: boolean;
     over_18: boolean;
-    preview: Preview;
+    preview?: Preview;
     all_awardings: any[];
     awarders: any[];
     media_only: boolean;
@@ -158,4 +146,11 @@ export interface ListingResult {
         geo_filter?: string;
         children: Listing[];
     };
+}
+
+export enum PostSorting {
+    HOT = 'hot',
+    BEST = 'best',
+    NEW = 'new',
+    RISING = 'rising',
 }

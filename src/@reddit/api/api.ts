@@ -149,11 +149,19 @@ export class Api {
     }
 
     async fetchProfile() {
-        return this.getJSON<Profile>('https://oauth.reddit.com/api/v1/me');
+        return this.getJSON<Profile>(
+            'https://oauth.reddit.com/api/v1/me',
+            new URLSearchParams({ raw_json: '1' }),
+        );
     }
 
-    async fetchListings(params: ResourceFetchParams[Resource.LISTINGS]) {
-        return this.getJSON<ListingResult>(`https://oauth.reddit.com/${params.type}`);
+    async fetchFeed(params: ResourceFetchParams[Resource.FEED]) {
+        const searchParams = new URLSearchParams();
+        searchParams.append('raw_json', '1');
+        if (params.after) {
+            searchParams.append('after', params.after);
+        }
+        return this.getJSON<ListingResult>(`https://oauth.reddit.com/${params.type}`, searchParams);
     }
 
     async fetchResource<T extends Resource = Resource>(
@@ -167,8 +175,8 @@ export class Api {
             case Resource.PROFILE: {
                 return this.fetchProfile();
             }
-            case Resource.LISTINGS: {
-                return this.fetchListings(params as ResourceFetchParams[Resource.LISTINGS]);
+            case Resource.FEED: {
+                return this.fetchFeed(params as ResourceFetchParams[Resource.FEED]);
             }
             default: {
                 return undefined;
