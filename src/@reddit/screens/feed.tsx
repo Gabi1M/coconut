@@ -1,5 +1,7 @@
 import React from 'react';
-import { FlatList, ListRenderItem, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+
+import { FlashList, ListRenderItem } from '@shopify/flash-list';
 
 import { Layout, Spinner } from '@ui-kitten/components';
 
@@ -8,7 +10,7 @@ import { Select } from '@reddit/generic';
 import { Listing, ListingResult, PostSorting } from '@reddit/models';
 
 const renderItem: ListRenderItem<Listing> = ({ item }) => <ListingCard listing={item} />;
-const keyExtractor = (item: Listing) => item.data.id;
+const keyExtractor = (item: Listing) => item.data.name;
 const labelExtractor = (value: PostSorting) => value.toUpperCase();
 
 const FeedScreen = () => {
@@ -42,11 +44,14 @@ const Content = ({
     }
 
     return (
-        <FlatList
-            data={feed.data.children}
+        <FlashList
             renderItem={renderItem}
-            keyExtractor={keyExtractor}
+            estimatedItemSize={310}
+            data={feed?.data.children}
             onEndReached={onRefresh}
+            onEndReachedThreshold={2}
+            keyExtractor={keyExtractor}
+            showsVerticalScrollIndicator={false}
         />
     );
 };

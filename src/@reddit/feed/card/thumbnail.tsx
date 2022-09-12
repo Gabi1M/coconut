@@ -9,7 +9,9 @@ interface Props {
 
 const PostThumbnail = ({ listing }: Props) => {
     const uri = listing.data.preview?.images.length
-        ? listing.data.preview.images[0].source.url
+        ? listing.data.preview.images[0].resolutions[
+              listing.data.preview.images[0].resolutions.length - 1
+          ].url
         : undefined;
     if (!uri) {
         return null;
