@@ -231,6 +231,7 @@ export const createResourceReducer = <T extends Resource = Resource>(
                 return {
                     ...state,
                     fetch: {
+                        ...state.fetch,
                         isLoading: true,
                     },
                 };
