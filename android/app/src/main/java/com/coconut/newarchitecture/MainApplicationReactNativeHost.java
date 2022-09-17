@@ -1,4 +1,4 @@
-package com.newreddit.newarchitecture;
+package com.coconut.newarchitecture;
 
 import android.app.Application;
 import androidx.annotation.NonNull;
@@ -19,9 +19,9 @@ import com.facebook.react.fabric.CoreComponentsRegistry;
 import com.facebook.react.fabric.FabricJSIModuleProvider;
 import com.facebook.react.fabric.ReactNativeConfig;
 import com.facebook.react.uimanager.ViewManagerRegistry;
-import com.newreddit.BuildConfig;
-import com.newreddit.newarchitecture.components.MainComponentsRegistry;
-import com.newreddit.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
+import com.coconut.BuildConfig;
+import com.coconut.newarchitecture.components.MainComponentsRegistry;
+import com.coconut.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
 import java.util.ArrayList;
 import java.util.List;
 
