@@ -7,7 +7,7 @@ import { Layout, Spinner } from '@ui-kitten/components';
 
 import { ListingCard, useManageFeed } from '@coconut/feed';
 import { Select } from '@coconut/generic';
-import { Listing, ListingResult, PostSorting } from '@coconut/models';
+import { Listing, PostSorting, Thing } from '@coconut/models';
 
 const renderItem: ListRenderItem<Listing> = ({ item }) => <ListingCard listing={item} />;
 const keyExtractor = (item: Listing) => item.data.name;
@@ -32,7 +32,7 @@ const Content = ({
     feed,
     onRefresh,
 }: {
-    feed: ListingResult | undefined;
+    feed: Thing<Listing> | undefined;
     onRefresh: () => void;
 }) => {
     if (!feed) {

@@ -2,7 +2,7 @@ import { apply, put, select, takeLatest } from 'redux-saga/effects';
 
 import { selectAccessToken } from '@coconut/accessToken';
 import { Api } from '@coconut/api';
-import { AccessToken, ListingResult } from '@coconut/models';
+import { AccessToken, Listing, Thing } from '@coconut/models';
 import {
     Resource,
     ResourceFetchAction,
@@ -18,7 +18,7 @@ function* fetchFeedSaga(action: ResourceFetchAction<Resource.FEED>) {
     const accessToken: AccessToken | undefined = yield select(selectAccessToken);
     const api = new Api(accessToken?.access_token);
     try {
-        const data: ListingResult | undefined = yield apply(api, api.fetchResource, [
+        const data: Thing<Listing> | undefined = yield apply(api, api.fetchResource, [
             Resource.FEED,
             action.params,
         ]);
@@ -26,7 +26,7 @@ function* fetchFeedSaga(action: ResourceFetchAction<Resource.FEED>) {
             throw new Error('Received feed data is undefined');
         }
 
-        const existingData: ListingResult | undefined = yield select(selectFeed);
+        const existingData: Thing<Listing> | undefined = yield select(selectFeed);
         const lastFeedFetchParams: ResourceFetchParams[Resource.FEED] | undefined = yield select(
             selectLastFeedFetchParams,
         );

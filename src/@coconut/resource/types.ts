@@ -1,4 +1,4 @@
-import { AccessToken, ListingResult, PostSorting, Profile } from '@coconut/models';
+import { AccessToken, Listing, PostSorting, Profile, Thing } from '@coconut/models';
 
 export enum Resource {
     ACCESS_TOKEN = 'access_token',
@@ -9,7 +9,7 @@ export enum Resource {
 export type ResourceDataType = {
     [Resource.ACCESS_TOKEN]: AccessToken;
     [Resource.PROFILE]: Profile;
-    [Resource.FEED]: ListingResult;
+    [Resource.FEED]: Thing<Listing>;
 };
 
 export type ResourceFetchParams = {

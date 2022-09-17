@@ -136,18 +136,6 @@ export interface Listing {
     data: Data;
 }
 
-export interface ListingResult {
-    kind: string;
-    data: {
-        after?: string;
-        before?: string;
-        dist: number;
-        modhash?: string;
-        geo_filter?: string;
-        children: Listing[];
-    };
-}
-
 export enum PostSorting {
     HOT = 'hot',
     BEST = 'best',

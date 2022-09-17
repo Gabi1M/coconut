@@ -2,8 +2,7 @@
 import { Buffer } from '@craftzdog/react-native-buffer';
 
 import { RedditInfo } from '@coconut/info';
-import { AccessToken, Profile } from '@coconut/models';
-import { ListingResult } from '@coconut/models/listing';
+import { AccessToken, Listing, Profile, Thing } from '@coconut/models';
 import {
     Resource,
     ResourceDeleteParams,
@@ -161,7 +160,10 @@ export class Api {
         if (params.after) {
             searchParams.append('after', params.after);
         }
-        return this.getJSON<ListingResult>(`https://oauth.reddit.com/${params.type}`, searchParams);
+        return this.getJSON<Thing<Listing>>(
+            `https://oauth.reddit.com/${params.type}`,
+            searchParams,
+        );
     }
 
     async fetchResource<T extends Resource = Resource>(
