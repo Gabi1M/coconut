@@ -1,3 +1,5 @@
+import { ThingItemKind } from './types';
+
 interface Source {
     url: string;
     width: number;
@@ -132,7 +134,7 @@ interface Data {
 }
 
 export interface Listing {
-    kind: string;
+    kind: ThingItemKind;
     data: Data;
 }
 

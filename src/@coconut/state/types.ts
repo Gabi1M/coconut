@@ -6,4 +6,5 @@ export interface GlobalState {
     accessToken: ResourceState<Resource.ACCESS_TOKEN>;
     profile: ResourceState<Resource.PROFILE>;
     feed: ResourceState<Resource.FEED>;
+    messages: ResourceState<Resource.MESSAGES>;
 }
