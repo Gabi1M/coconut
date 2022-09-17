@@ -12,8 +12,8 @@
     "moduleResolution": "node",
     "baseUrl": "src",
     "paths": {
-      "@reddit/*": [
-        "@reddit/*",
+      "@coconut/*": [
+        "@coconut/*",
       ]
     },
     "noEmit": true,
