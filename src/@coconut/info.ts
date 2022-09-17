@@ -3,7 +3,7 @@ import uuid from 'react-native-uuid';
 
 import { AuthScope } from './models';
 
-const CLIENT_ID = 'NzvRCnjcc_qZrtkH2cAkwg';
+const CLIENT_ID = 'BNDJ4PbNk7aBI4WBFY-7aA';
 const REDIRECT_URL = 'http://www.example.com/unused/redirect/uri';
 
 export const RedditInfo = Object.freeze({
