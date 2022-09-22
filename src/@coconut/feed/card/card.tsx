@@ -1,6 +1,6 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
 
+import { Card } from '@coconut/generic';
 import { Listing } from '@coconut/models';
 
 import PostDetails from './details';
@@ -12,7 +12,7 @@ interface Props {
 }
 
 const PostCard = ({ listing }: Props) => (
-    <View style={styles.root}>
+    <Card>
         <PostTitle title={listing.data.title} />
         <PostThumbnail listing={listing} />
         <PostDetails
@@ -20,16 +20,7 @@ const PostCard = ({ listing }: Props) => (
             voteRatio={listing.data.upvote_ratio}
             subredditName={listing.data.subreddit_name_prefixed}
         />
-    </View>
+    </Card>
 );
-
-const styles = StyleSheet.create({
-    root: {
-        marginVertical: 5,
-        padding: 5,
-        borderRadius: 10,
-        backgroundColor: '#1F2428',
-    },
-});
 
 export default PostCard;

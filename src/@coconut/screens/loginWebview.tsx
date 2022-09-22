@@ -24,6 +24,7 @@ const LoginWebviewScreen = () => {
                     }
                 }
             }}
+            sharedCookiesEnabled={false}
             domStorageEnabled={false}
             thirdPartyCookiesEnabled={false}
         />
@@ -33,13 +34,6 @@ const LoginWebviewScreen = () => {
 const styles = StyleSheet.create({
     root: {
         flex: 1,
-    },
-    input: {
-        marginVertical: 5,
-    },
-    button: {
-        marginVertical: 5,
-        width: '100%',
     },
 });
 

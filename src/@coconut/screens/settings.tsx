@@ -1,8 +1,9 @@
 import React from 'react';
 import { FlatList, ListRenderItem, StyleSheet } from 'react-native';
 
-import { Layout, Text } from '@ui-kitten/components';
+import { Layout, useTheme } from '@ui-kitten/components';
 
+import { Dimensions } from '@coconut/branding';
 import { ListItem } from '@coconut/generic';
 import { SettingsItem, useSettingsItems } from '@coconut/settings';
 
@@ -11,11 +12,11 @@ const renderItem: ListRenderItem<SettingsItem> = ({ item }) => <ListItem {...ite
 const keyExtractor = (item: SettingsItem) => item.title;
 
 const SettingsScreen = () => {
+    const styles = useStyles();
     const settingsItems = useSettingsItems();
 
     return (
         <Layout style={styles.root}>
-            <Text category='h2'>Settings</Text>
             <FlatList
                 data={settingsItems}
                 renderItem={renderItem}
@@ -26,11 +27,18 @@ const SettingsScreen = () => {
     );
 };
 
-const styles = StyleSheet.create({
-    root: {
-        flex: 1,
-        paddingHorizontal: 10,
-    },
-});
+const useStyles = () => {
+    const theme = useTheme();
+
+    return StyleSheet.create({
+        root: {
+            flex: 1,
+            paddingHorizontal: Dimensions.ternarySpacing,
+        },
+        title: {
+            color: theme['color-basic-100'],
+        },
+    });
+};
 
 export default SettingsScreen;

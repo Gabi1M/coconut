@@ -5,6 +5,7 @@ import { FlashList, ListRenderItem } from '@shopify/flash-list';
 
 import { Layout, Spinner } from '@ui-kitten/components';
 
+import { Dimensions } from '@coconut/branding';
 import { ListingCard, useManageFeed } from '@coconut/feed';
 import { Select } from '@coconut/generic';
 import { Listing, PostSorting, Thing } from '@coconut/models';
@@ -59,7 +60,7 @@ const Content = ({
 const styles = StyleSheet.create({
     root: {
         flex: 1,
-        paddingHorizontal: 10,
+        paddingHorizontal: Dimensions.ternarySpacing,
     },
     spinnerContainer: {
         flex: 1,
