@@ -14,6 +14,7 @@
     "@craftzdog/react-native-buffer": "^6.0.5",
     "@eva-design/eva": "^2.1.1",
     "@react-native-async-storage/async-storage": "^1.17.10",
+    "@react-native-cookies/cookies": "^6.2.1",
     "@react-native-picker/picker": "^2.4.4",
     "@react-navigation/bottom-tabs": "^6.3.3",
     "@react-navigation/native": "^6.0.12",

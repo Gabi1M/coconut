@@ -138,8 +138,7 @@ export class Api {
     }
 
     async fetchAccessToken(params: ResourceFetchParams[Resource.ACCESS_TOKEN]) {
-        const data = new URLSearchParams();
-        Object.entries(params).forEach(([key, value]) => data.append(key, value));
+        const data = new URLSearchParams(Object.entries(params));
         return this.postJSON<AccessToken>(
             'https://www.reddit.com/api/v1/access_token',
             data.toString(),
