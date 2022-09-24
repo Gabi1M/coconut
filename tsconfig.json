@@ -21,7 +21,8 @@
     "target": "esnext",
     "types": [
       "jest"
-    ]
+    ],
+    "skipLibCheck": true,
   },
   "exclude": [
     "node_modules",
