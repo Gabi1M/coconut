@@ -1,0 +1,33 @@
+version: 2.1
+
+orbs:
+    node: circleci/node@5.0.2
+
+jobs:
+    lint:
+        executor: node/default
+        steps:
+            - checkout
+            - node/install-packages:
+                  pkg-manager: yarn
+            - run:
+                  command: yarn lint
+                  name: Check linting rules
+            - run:
+                  command: yarn types
+                  name: Check types
+    # test:
+    #     executor: node/default
+    #     steps:
+    #         - checkout
+    #         - node/install-packages:
+    #               pkg-manager: yarn
+    #         - run:
+    #               command: yarn test
+    #               name: Run tests
+
+workflows:
+    lint_and_test:
+        jobs:
+            - lint
+            # - test

@@ -8,6 +8,7 @@
     "start": "react-native start",
     "test": "jest",
     "lint": "eslint . --ext .ts,.tsx",
+    "types": "yarn tsc --noEmit -p ./tsconfig.json",
     "fix": "yarn lint --fix"
   },
   "dependencies": {
