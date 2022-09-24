@@ -1,30 +1,43 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { WebView } from 'react-native-webview';
+import { WebView, WebViewNavigation } from 'react-native-webview';
+
+import CookieManager from '@react-native-cookies/cookies';
 
 import { RedditInfo } from '@coconut/info';
 import { Resource, useFetchResource } from '@coconut/resource';
 
 const LoginWebviewScreen = () => {
     const fetchAccessToken = useFetchResource(Resource.ACCESS_TOKEN);
+    const [receivedCode, setReceivedCode] = React.useState(false);
+
+    React.useEffect(() => {
+        CookieManager.clearAll();
+    }, []);
+
+    const onNavigationStateChange = React.useCallback(
+        (e: WebViewNavigation) => {
+            if (e.url.startsWith(RedditInfo.redirectUrl)) {
+                const code = new URL(e.url).searchParams.get('code');
+                if (code && !receivedCode) {
+                    setReceivedCode(true);
+                    fetchAccessToken({
+                        code,
+                        grant_type: 'authorization_code',
+                        redirect_uri: RedditInfo.redirectUrl,
+                    });
+                }
+            }
+        },
+        [receivedCode, setReceivedCode, fetchAccessToken],
+    );
 
     return (
         <WebView
+            incognito={true}
             style={styles.root}
             source={{ uri: RedditInfo.generateAuthUri() }}
-            onNavigationStateChange={(e) => {
-                if (e.url.startsWith('http://www.example.com/unused/redirect/uri')) {
-                    const code = new URL(e.url).searchParams.get('code');
-                    if (code) {
-                        fetchAccessToken({
-                            code,
-                            grant_type: 'authorization_code',
-                            redirect_uri: 'http://www.example.com/unused/redirect/uri',
-                        });
-                    }
-                }
-            }}
-            sharedCookiesEnabled={false}
+            onNavigationStateChange={onNavigationStateChange}
             domStorageEnabled={false}
             thirdPartyCookiesEnabled={false}
         />
