@@ -8,15 +8,17 @@ import {
     ResourceFetchAction,
     createResourceFetchAction,
     createResourceFetchSaga,
+    selectResourceFetchData,
 } from '@coconut/resource';
 
 import { AccessTokenActions } from './reducer';
-import { selectAccessToken } from './selectors';
 
 function* fetchAccessTokenSaga(action: ResourceFetchAction<Resource.ACCESS_TOKEN>) {
     yield call(createResourceFetchSaga(Resource.ACCESS_TOKEN), action);
     yield delay(1000);
-    const accessToken: AccessToken | undefined = yield select(selectAccessToken);
+    const accessToken: AccessToken | undefined = yield select(
+        selectResourceFetchData(Resource.ACCESS_TOKEN),
+    );
     if (accessToken) {
         yield apply(AsyncStorage, AsyncStorage.setValue, [
             AsyncStorageKeys.ACCESS_TOKEN,

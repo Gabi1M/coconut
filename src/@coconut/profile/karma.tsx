@@ -1,16 +1,15 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { useSelector } from 'react-redux';
 
 import { Text, useTheme } from '@ui-kitten/components';
 
 import { Dimensions } from '@coconut/branding';
-
-import { selectProfile } from './state';
+import { Profile } from '@coconut/models';
+import { Resource, useSelectResourceFetchData } from '@coconut/resource';
 
 const KarmaBadge = () => {
     const styles = useStyles();
-    const profile = useSelector(selectProfile);
+    const profile = useSelectResourceFetchData(Resource.PROFILE) as Profile | undefined;
 
     if (!profile) {
         return null;
