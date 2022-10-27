@@ -144,3 +144,8 @@ export enum PostSorting {
     NEW = 'new',
     RISING = 'rising',
 }
+
+export interface FeedFetchParams {
+    type: PostSorting;
+    after?: string;
+}

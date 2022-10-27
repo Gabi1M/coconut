@@ -1,4 +1,13 @@
-import { AccessToken, Listing, Message, PostSorting, Profile, Thing } from '@coconut/models';
+import {
+    AccessToken,
+    AccessTokenFetchParams,
+    FeedFetchParams,
+    Listing,
+    Message,
+    MessagesFetchParams,
+    Profile,
+    Thing,
+} from '@coconut/models';
 
 export enum Resource {
     ACCESS_TOKEN = 'access_token',
@@ -15,19 +24,10 @@ export type ResourceDataType = {
 };
 
 export type ResourceFetchParams = {
-    [Resource.ACCESS_TOKEN]: {
-        code: string;
-        grant_type: 'authorization_code' | 'refresh_token';
-        redirect_uri: string;
-    };
+    [Resource.ACCESS_TOKEN]: AccessTokenFetchParams;
     [Resource.PROFILE]: undefined;
-    [Resource.FEED]: {
-        type: PostSorting;
-        after?: string;
-    };
-    [Resource.MESSAGES]: {
-        after?: string;
-    };
+    [Resource.FEED]: FeedFetchParams;
+    [Resource.MESSAGES]: MessagesFetchParams;
 };
 
 export type ResourceSetParams = {
