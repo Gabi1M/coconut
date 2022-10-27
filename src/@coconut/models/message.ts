@@ -30,3 +30,7 @@ export interface Message {
         distinguished?: string;
     };
 }
+
+export interface MessagesFetchParams {
+    after?: string;
+}

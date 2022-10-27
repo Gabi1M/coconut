@@ -1,4 +1,13 @@
-import { AccessToken, Listing, Message, PostSorting, Profile, Thing } from '@coconut/models';
+import {
+    AccessToken,
+    AccessTokenFetchParams,
+    FeedFetchParams,
+    Listing,
+    Message,
+    MessagesFetchParams,
+    Profile,
+    Thing,
+} from '@coconut/models';
 
 export enum Resource {
     ACCESS_TOKEN = 'access_token',
@@ -7,30 +16,49 @@ export enum Resource {
     MESSAGES = 'messages',
 }
 
-export type ResourceDataType = {
+export type ResourceFetchDataType = {
     [Resource.ACCESS_TOKEN]: AccessToken;
     [Resource.PROFILE]: Profile;
     [Resource.FEED]: Thing<Listing>;
     [Resource.MESSAGES]: Thing<Message>;
 };
 
-export type ResourceFetchParams = {
-    [Resource.ACCESS_TOKEN]: {
-        code: string;
-        grant_type: 'authorization_code' | 'refresh_token';
-        redirect_uri: string;
-    };
+export type ResourceSetDataType = {
+    [Resource.ACCESS_TOKEN]: undefined;
     [Resource.PROFILE]: undefined;
-    [Resource.FEED]: {
-        type: PostSorting;
-        after?: string;
-    };
-    [Resource.MESSAGES]: {
-        after?: string;
-    };
+    [Resource.FEED]: undefined;
+    [Resource.MESSAGES]: undefined;
+};
+
+export type ResourceUpdateDataType = {
+    [Resource.ACCESS_TOKEN]: undefined;
+    [Resource.PROFILE]: undefined;
+    [Resource.FEED]: undefined;
+    [Resource.MESSAGES]: undefined;
+};
+
+export type ResourceDeleteDataType = {
+    [Resource.ACCESS_TOKEN]: undefined;
+    [Resource.PROFILE]: undefined;
+    [Resource.FEED]: undefined;
+    [Resource.MESSAGES]: undefined;
+};
+
+export type ResourceFetchParams = {
+    [Resource.ACCESS_TOKEN]: AccessTokenFetchParams;
+    [Resource.PROFILE]: undefined;
+    [Resource.FEED]: FeedFetchParams;
+    [Resource.MESSAGES]: MessagesFetchParams;
 };
 
 export type ResourceSetParams = {
+    [Resource.ACCESS_TOKEN]: undefined;
+    [Resource.PROFILE]: undefined;
+    [Resource.FEED]: undefined;
+    [Resource.MESSAGES]: undefined;
+};
+
+export type ResourceUpdateParams = {
     [Resource.ACCESS_TOKEN]: undefined;
     [Resource.PROFILE]: undefined;
     [Resource.FEED]: undefined;

@@ -5,3 +5,9 @@ export interface AccessToken {
     scope: string;
     refresh_token: string;
 }
+
+export interface AccessTokenFetchParams {
+    code: string;
+    grant_type: 'authorization_code' | 'refresh_token';
+    redirect_uri: string;
+}

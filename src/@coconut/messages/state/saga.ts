@@ -1,6 +1,5 @@
 import { apply, put, select, takeLatest } from 'redux-saga/effects';
 
-import { selectAccessToken } from '@coconut/accessToken';
 import { Api } from '@coconut/api';
 import { AccessToken, Message, Thing } from '@coconut/models';
 import {
@@ -8,13 +7,15 @@ import {
     ResourceFetchAction,
     createResourceFetchFailAction,
     createResourceFetchSuccessAction,
+    selectResourceFetchData,
 } from '@coconut/resource';
 
 import { MessagesActions } from './reducer';
-import { selectMessages } from './selectors';
 
 function* fetchMessagesSaga(action: ResourceFetchAction<Resource.MESSAGES>) {
-    const accessToken: AccessToken | undefined = yield select(selectAccessToken);
+    const accessToken: AccessToken | undefined = yield select(
+        selectResourceFetchData(Resource.ACCESS_TOKEN),
+    );
     const api = new Api(accessToken?.access_token);
     try {
         const data: Thing<Message> | undefined = yield apply(api, api.fetchResource, [
@@ -25,7 +26,9 @@ function* fetchMessagesSaga(action: ResourceFetchAction<Resource.MESSAGES>) {
             throw new Error('Received messages data is undefined');
         }
 
-        const existingData: Thing<Message> | undefined = yield select(selectMessages);
+        const existingData: Thing<Message> | undefined = yield select(
+            selectResourceFetchData(Resource.MESSAGES),
+        );
 
         if (!existingData) {
             yield put(createResourceFetchSuccessAction(Resource.MESSAGES, data, action.params));

@@ -1,16 +1,13 @@
 import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
 
-import { PostSorting } from '@coconut/models';
-import { Resource, useFetchResource } from '@coconut/resource';
-
-import { selectFeed } from './state';
+import { Listing, PostSorting, Thing } from '@coconut/models';
+import { Resource, useFetchResource, useSelectResourceFetchData } from '@coconut/resource';
 
 const postSortingOptions = Object.values(PostSorting).filter((item) => isNaN(Number(item)));
 
 export const useManageFeed = () => {
     const [postSorting, setPostSorting] = React.useState(postSortingOptions[0]);
-    const feed = useSelector(selectFeed);
+    const feed = useSelectResourceFetchData(Resource.FEED) as Thing<Listing> | undefined;
     const fetchFeed = useFetchResource(Resource.FEED);
 
     useEffect(() => {

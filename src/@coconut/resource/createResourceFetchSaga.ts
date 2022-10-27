@@ -1,7 +1,6 @@
 /* eslint-disable no-restricted-imports */
 import { apply, put, select } from 'redux-saga/effects';
 
-import { selectAccessToken } from '@coconut/accessToken/state/selectors';
 import { Api } from '@coconut/api';
 import { AccessToken } from '@coconut/models';
 
@@ -10,14 +9,17 @@ import {
     createResourceFetchFailAction,
     createResourceFetchSuccessAction,
 } from './createResourceReducer';
-import { Resource, ResourceDataType } from './types';
+import { selectResourceFetchData } from './selectors';
+import { Resource, ResourceFetchDataType } from './types';
 
 export const createResourceFetchSaga = <T extends Resource = Resource>(resourceName: T) => {
     function* fetchResource(action: ResourceFetchAction<T>) {
-        const accessToken: AccessToken | undefined = yield select(selectAccessToken);
+        const accessToken: AccessToken | undefined = yield select(
+            selectResourceFetchData(Resource.ACCESS_TOKEN),
+        );
         const api = new Api(accessToken?.access_token);
         try {
-            const data: ResourceDataType[T] = yield apply(api, api.fetchResource, [
+            const data: ResourceFetchDataType[T] = yield apply(api, api.fetchResource, [
                 resourceName,
                 action.params,
             ]);

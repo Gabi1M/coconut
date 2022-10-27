@@ -7,9 +7,10 @@
     "ios": "react-native run-ios --simulator='iPhone 14 Pro Max'",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint . --ext .ts,.tsx",
+    "lint": "yarn eslint src",
+    "formatting": "yarn prettier -c src",
     "types": "yarn tsc --noEmit -p ./tsconfig.json",
-    "fix": "yarn lint --fix"
+    "fix": "yarn lint --fix && yarn prettier -w src && yarn types"
   },
   "dependencies": {
     "@craftzdog/react-native-buffer": "^6.0.5",

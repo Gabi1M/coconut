@@ -8,15 +8,21 @@ import {
     ResourceDeleteParams,
     ResourceFetchParams,
     ResourceSetParams,
+    ResourceUpdateParams,
 } from '@coconut/resource/types';
 
-import { ApiError } from './types';
+import { ApiError, ContentType, Headers, RequestMethod } from './types';
 
-enum RequestMethod {
-    GET = 'GET',
-    POST = 'POST',
-    DELETE = 'DELETE',
-}
+const isSuccessStatusCode = (code: number) => code >= 200 && code < 400;
+
+const handleResponse = async <T>(response: Response): Promise<T> => {
+    const contentType = response.headers.get(Headers.CONTENT_TYPE);
+    if (contentType && contentType.indexOf(ContentType.APPLICATION_JSON) !== -1) {
+        return (await response.json()) as T;
+    }
+
+    return (await response.text()) as unknown as T;
+};
 
 export class Api {
     private accessToken?: string;
@@ -25,24 +31,20 @@ export class Api {
         this.accessToken = accessToken;
     }
 
-    setAccessToken(accessToken: string) {
-        this.accessToken = accessToken;
-    }
-
     private getHeaders() {
         if (this.accessToken) {
             return {
-                Authorization: `Bearer ${this.accessToken}`,
+                [Headers.AUTHORIZATION]: `Bearer ${this.accessToken}`,
             };
         }
 
         const credentials = Buffer.from(`${RedditInfo.clientId}:`).toString('base64');
         return {
-            Authorization: `Basic ${credentials}`,
+            [Headers.AUTHORIZATION]: `Basic ${credentials}`,
         };
     }
 
-    private async getJSON<T>(url: string, params?: URLSearchParams) {
+    private async get<T>(url: string, params?: URLSearchParams) {
         const finalUrl = params ? `${url}?${params.toString()}` : url;
 
         const response = await fetch(finalUrl, {
@@ -50,68 +52,62 @@ export class Api {
             headers: this.getHeaders(),
         });
 
-        if (response.status !== 200 && response.status !== 201) {
+        if (!isSuccessStatusCode(response.status)) {
             throw new ApiError(
                 response.status,
                 `GET request for ${finalUrl} failed with status: ${response.status}`,
             );
         }
 
-        const contentType = response.headers.get('content-type');
-        if (contentType && contentType.indexOf('application/json') !== -1) {
-            return (await response.json()) as T;
-        }
-
-        return (await response.text()) as unknown as T;
+        return handleResponse<T>(response);
     }
 
-    private async postJSON<T>(url: string, data: string, customContentType?: string) {
+    private async post<T>(url: string, data: string | FormData, customHeaderType?: string) {
+        const contentTypeHeader =
+            typeof data === 'string'
+                ? { [Headers.CONTENT_TYPE]: customHeaderType ?? ContentType.APPLICATION_JSON }
+                : undefined;
         const response = await fetch(url, {
             method: RequestMethod.POST,
             headers: {
                 ...this.getHeaders(),
-                'Content-Type': customContentType ?? 'application/json',
+                ...contentTypeHeader,
             },
             body: data,
         });
 
-        if (response.status !== 200 && response.status !== 201) {
+        if (!isSuccessStatusCode(response.status)) {
             throw new ApiError(
                 response.status,
                 `POST request for ${url} failed with status: ${response.status}`,
             );
         }
 
-        const contentType = response.headers.get('content-type');
-        if (contentType && contentType.indexOf('application/json') !== -1) {
-            return (await response.json()) as T;
-        }
-
-        return (await response.text()) as unknown as T;
+        return handleResponse<T>(response);
     }
 
-    private async postFormData<T>(url: string, data: FormData) {
+    private async update<T>(url: string, data: string | FormData, customHeaderType?: string) {
+        const contentTypeHeader =
+            typeof data === 'string'
+                ? { [Headers.CONTENT_TYPE]: customHeaderType ?? ContentType.APPLICATION_JSON }
+                : undefined;
         const response = await fetch(url, {
-            method: RequestMethod.POST,
+            method: RequestMethod.PUT,
             headers: {
                 ...this.getHeaders(),
+                ...contentTypeHeader,
             },
             body: data,
         });
 
-        if (response.status !== 200 && response.status !== 201) {
+        if (!isSuccessStatusCode(response.status)) {
             throw new ApiError(
                 response.status,
-                `POST request for ${url} failed with status: ${response.status}`,
+                `PUT request for ${url} failed with status: ${response.status}`,
             );
         }
 
-        const contentType = response.headers.get('content-type');
-        if (contentType && contentType.indexOf('application/json') !== -1) {
-            return (await response.json()) as T;
-        }
-
-        return (await response.text()) as unknown as T;
+        return handleResponse<T>(response);
     }
 
     private async delete<T>(url: string, params?: URLSearchParams) {
@@ -122,24 +118,19 @@ export class Api {
             headers: this.getHeaders(),
         });
 
-        if (response.status !== 200 && response.status !== 201) {
+        if (!isSuccessStatusCode(response.status)) {
             throw new ApiError(
                 response.status,
                 `DELETE request for ${finalUrl} failed with status: ${response.status}`,
             );
         }
 
-        const contentType = response.headers.get('content-type');
-        if (contentType && contentType.indexOf('application/json') !== -1) {
-            return (await response.json()) as T;
-        }
-
-        return (await response.text()) as unknown as T;
+        return handleResponse<T>(response);
     }
 
     async fetchAccessToken(params: ResourceFetchParams[Resource.ACCESS_TOKEN]) {
         const data = new URLSearchParams(Object.entries(params));
-        return this.postJSON<AccessToken>(
+        return this.post<AccessToken>(
             'https://www.reddit.com/api/v1/access_token',
             data.toString(),
             'application/x-www-form-urlencoded',
@@ -147,7 +138,7 @@ export class Api {
     }
 
     async fetchProfile() {
-        return this.getJSON<Profile>(
+        return this.get<Profile>(
             'https://oauth.reddit.com/api/v1/me',
             new URLSearchParams({ raw_json: '1' }),
         );
@@ -159,10 +150,7 @@ export class Api {
         if (params?.after) {
             searchParams.append('after', params.after);
         }
-        return this.getJSON<Thing<Listing>>(
-            `https://oauth.reddit.com/${params.type}`,
-            searchParams,
-        );
+        return this.get<Thing<Listing>>(`https://oauth.reddit.com/${params.type}`, searchParams);
     }
 
     async fetchMessages(params: ResourceFetchParams[Resource.MESSAGES]) {
@@ -171,7 +159,7 @@ export class Api {
         if (params?.after) {
             searchParams.append('after', params.after);
         }
-        return this.getJSON<Thing<Message>>(`https://oauth.reddit.com/message/inbox`, searchParams);
+        return this.get<Thing<Message>>(`https://oauth.reddit.com/message/inbox`, searchParams);
     }
 
     async fetchResource<T extends Resource = Resource>(
@@ -200,6 +188,17 @@ export class Api {
     async setResource<T extends Resource = Resource>(
         resourceName: T,
         params?: ResourceSetParams[T], // eslint-disable-line @typescript-eslint/no-unused-vars
+    ) {
+        switch (resourceName) {
+            default: {
+                return undefined;
+            }
+        }
+    }
+
+    async updateResource<T extends Resource = Resource>(
+        resourceName: T,
+        params?: ResourceUpdateParams[T], // eslint-disable-line @typescript-eslint/no-unused-vars
     ) {
         switch (resourceName) {
             default: {

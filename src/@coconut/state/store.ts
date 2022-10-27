@@ -5,6 +5,7 @@ import { accessTokenReducer, accessTokenSaga } from '@coconut/accessToken';
 import { feedReducer, feedSaga } from '@coconut/feed';
 import { messagesReducer, messagesSaga } from '@coconut/messages';
 import { profileReducer, profileSaga } from '@coconut/profile';
+import { Resource } from '@coconut/resource';
 
 import { startupSaga } from './startupSaga';
 import { GlobalState } from './types';
@@ -15,10 +16,10 @@ export const createStore = () => {
     const sagaMiddleware = createSagaMiddleware();
     const store = createReduxStore(
         combineReducers<GlobalState>({
-            accessToken: accessTokenReducer,
-            profile: profileReducer,
-            feed: feedReducer,
-            messages: messagesReducer,
+            [Resource.ACCESS_TOKEN]: accessTokenReducer,
+            [Resource.PROFILE]: profileReducer,
+            [Resource.FEED]: feedReducer,
+            [Resource.MESSAGES]: messagesReducer,
         }),
         applyMiddleware(sagaMiddleware),
     );
