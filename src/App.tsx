@@ -1,4 +1,5 @@
 import React from 'react';
+import { MenuProvider } from 'react-native-popup-menu';
 import SplashScreen from 'react-native-splash-screen';
 import { Provider } from 'react-redux';
 
@@ -21,7 +22,9 @@ const App = () => {
             <IconRegistry icons={EvaIconsPack} />
             <ApplicationProvider {...eva} theme={eva.dark}>
                 <NavigationContainer ref={navigationRef}>
-                    <StackNavigator />
+                    <MenuProvider>
+                        <StackNavigator />
+                    </MenuProvider>
                 </NavigationContainer>
             </ApplicationProvider>
         </Provider>

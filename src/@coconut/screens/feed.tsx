@@ -7,7 +7,7 @@ import { Layout, Spinner } from '@ui-kitten/components';
 
 import { Dimensions } from '@coconut/branding';
 import { ListingCard, useManageFeed } from '@coconut/feed';
-import { Select } from '@coconut/generic';
+import { PopupMenu } from '@coconut/generic';
 import { Listing, PostSorting, Thing } from '@coconut/models';
 
 const renderItem: ListRenderItem<Listing> = ({ item }) => <ListingCard listing={item} />;
@@ -18,7 +18,7 @@ const FeedScreen = () => {
     const { feed, postSorting, postSortingOptions, onRefresh, setPostSorting } = useManageFeed();
     return (
         <Layout style={styles.root}>
-            <Select
+            <PopupMenu
                 data={postSortingOptions}
                 value={postSorting}
                 onChange={setPostSorting}
