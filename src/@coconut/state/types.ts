@@ -3,8 +3,8 @@ import { ResourceState } from '@coconut/resource/createResourceReducer';
 import { Resource } from '@coconut/resource/types';
 
 export interface GlobalState {
-    accessToken: ResourceState<Resource.ACCESS_TOKEN>;
-    profile: ResourceState<Resource.PROFILE>;
-    feed: ResourceState<Resource.FEED>;
-    messages: ResourceState<Resource.MESSAGES>;
+    [Resource.ACCESS_TOKEN]: ResourceState<Resource.ACCESS_TOKEN>;
+    [Resource.PROFILE]: ResourceState<Resource.PROFILE>;
+    [Resource.FEED]: ResourceState<Resource.FEED>;
+    [Resource.MESSAGES]: ResourceState<Resource.MESSAGES>;
 }
