@@ -1,7 +1,7 @@
 import {
     BaseAction,
     Resource,
-    ResourceDataType,
+    ResourceFetchDataType,
     ResourceDeleteParams,
     ResourceFetchParams,
     ResourceSetParams,
@@ -22,7 +22,7 @@ export type Actions = { [key in ActionsType]: string };
 
 // #region State
 export type ResourceFetchState<T extends Resource = Resource> = {
-    data?: ResourceDataType[T];
+    data?: ResourceFetchDataType[T];
     params?: ResourceFetchParams[T];
     error?: Error;
     isLoading: boolean;
@@ -61,7 +61,7 @@ export type ResourceFetchAction<T extends Resource = Resource> = BaseAction & {
 };
 
 export type ResourceFetchSuccessAction<T extends Resource = Resource> = ResourceFetchAction<T> & {
-    data: ResourceDataType[T];
+    data: ResourceFetchDataType[T];
 };
 
 export type ResourceFetchFailAction<T extends Resource = Resource> = ResourceFetchAction<T> & {
@@ -115,7 +115,7 @@ export const createResourceFetchAction = <T extends Resource = Resource>(
 
 export const createResourceFetchSuccessAction = <T extends Resource = Resource>(
     resourceName: T,
-    data: ResourceDataType[T],
+    data: ResourceFetchDataType[T],
     params?: ResourceFetchParams[T],
 ): ResourceFetchSuccessAction<T> => ({
     type: `${resourceName.toUpperCase()}/FETCH_SUCCESS`,

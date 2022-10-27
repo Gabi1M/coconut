@@ -16,7 +16,7 @@ export enum Resource {
     MESSAGES = 'messages',
 }
 
-export type ResourceDataType = {
+export type ResourceFetchDataType = {
     [Resource.ACCESS_TOKEN]: AccessToken;
     [Resource.PROFILE]: Profile;
     [Resource.FEED]: Thing<Listing>;

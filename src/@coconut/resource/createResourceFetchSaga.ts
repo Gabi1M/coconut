@@ -10,14 +10,14 @@ import {
     createResourceFetchFailAction,
     createResourceFetchSuccessAction,
 } from './createResourceReducer';
-import { Resource, ResourceDataType } from './types';
+import { Resource, ResourceFetchDataType } from './types';
 
 export const createResourceFetchSaga = <T extends Resource = Resource>(resourceName: T) => {
     function* fetchResource(action: ResourceFetchAction<T>) {
         const accessToken: AccessToken | undefined = yield select(selectAccessToken);
         const api = new Api(accessToken?.access_token);
         try {
-            const data: ResourceDataType[T] = yield apply(api, api.fetchResource, [
+            const data: ResourceFetchDataType[T] = yield apply(api, api.fetchResource, [
                 resourceName,
                 action.params,
             ]);
