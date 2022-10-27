@@ -2,6 +2,7 @@ import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import {
+    createResourceClearAction,
     createResourceDeleteAction,
     createResourceFetchAction,
     createResourceSetAction,
@@ -71,6 +72,14 @@ export const useDeleteResource = <T extends Resource = Resource>(resourceName: T
         },
         [dispatch, resourceName],
     );
+};
+
+export const useClearResource = <T extends Resource = Resource>(resourceName: T) => {
+    const dispatch = useDispatch();
+
+    return useCallback(() => {
+        dispatch(createResourceClearAction(resourceName));
+    }, [dispatch, resourceName]);
 };
 
 export const useSelectResourceFetchData = <T extends Resource = Resource>(resource: T) =>

@@ -19,6 +19,11 @@ export const useNavigateToSubreddits = () => {
     return () => navigation.navigate(StackRoutes.SUBREDDITS);
 };
 
+export const useNavigateToComments = () => {
+    const navigation = useNavigation();
+    return () => navigation.navigate(StackRoutes.COMMENTS);
+};
+
 export const useNavigateToFeed = () => {
     const navigation = useNavigation();
     return () =>

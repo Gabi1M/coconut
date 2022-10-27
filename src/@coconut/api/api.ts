@@ -2,7 +2,7 @@
 import { Buffer } from '@craftzdog/react-native-buffer';
 
 import { RedditInfo } from '@coconut/info';
-import { AccessToken, Listing, Message, Profile, Thing } from '@coconut/models';
+import { AccessToken, Comments, Listing, Message, Profile, Thing } from '@coconut/models';
 import {
     Resource,
     ResourceDeleteParams,
@@ -162,6 +162,15 @@ export class Api {
         return this.get<Thing<Message>>(`https://oauth.reddit.com/message/inbox`, searchParams);
     }
 
+    async fetchComments(params: ResourceFetchParams[Resource.COMMENTS]) {
+        const searchParams = new URLSearchParams();
+        searchParams.append('raw_json', '1');
+        return this.get<Comments>(
+            `https://oauth.reddit.com/${params.subreddit}/comments/${params.id}`,
+            searchParams,
+        );
+    }
+
     async fetchResource<T extends Resource = Resource>(
         resource: T,
         params?: ResourceFetchParams[T],
@@ -178,6 +187,9 @@ export class Api {
             }
             case Resource.MESSAGES: {
                 return this.fetchMessages(params as ResourceFetchParams[Resource.MESSAGES]);
+            }
+            case Resource.COMMENTS: {
+                return this.fetchComments(params as ResourceFetchParams[Resource.COMMENTS]);
             }
             default: {
                 return undefined;
