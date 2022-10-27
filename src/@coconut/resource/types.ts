@@ -23,6 +23,27 @@ export type ResourceFetchDataType = {
     [Resource.MESSAGES]: Thing<Message>;
 };
 
+export type ResourceSetDataType = {
+    [Resource.ACCESS_TOKEN]: undefined;
+    [Resource.PROFILE]: undefined;
+    [Resource.FEED]: undefined;
+    [Resource.MESSAGES]: undefined;
+};
+
+export type ResourceUpdateDataType = {
+    [Resource.ACCESS_TOKEN]: undefined;
+    [Resource.PROFILE]: undefined;
+    [Resource.FEED]: undefined;
+    [Resource.MESSAGES]: undefined;
+};
+
+export type ResourceDeleteDataType = {
+    [Resource.ACCESS_TOKEN]: undefined;
+    [Resource.PROFILE]: undefined;
+    [Resource.FEED]: undefined;
+    [Resource.MESSAGES]: undefined;
+};
+
 export type ResourceFetchParams = {
     [Resource.ACCESS_TOKEN]: AccessTokenFetchParams;
     [Resource.PROFILE]: undefined;
@@ -31,6 +52,13 @@ export type ResourceFetchParams = {
 };
 
 export type ResourceSetParams = {
+    [Resource.ACCESS_TOKEN]: undefined;
+    [Resource.PROFILE]: undefined;
+    [Resource.FEED]: undefined;
+    [Resource.MESSAGES]: undefined;
+};
+
+export type ResourceUpdateParams = {
     [Resource.ACCESS_TOKEN]: undefined;
     [Resource.PROFILE]: undefined;
     [Resource.FEED]: undefined;
