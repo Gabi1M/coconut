@@ -7,7 +7,7 @@ import { Layout, Spinner } from '@ui-kitten/components';
 
 import { Dimensions } from '@coconut/branding';
 import { MessageCard, useManageInbox } from '@coconut/messages';
-import { Message, Thing } from '@coconut/models';
+import { Message } from '@coconut/models';
 
 const renderItem: ListRenderItem<Message> = ({ item }) => <MessageCard message={item} />;
 const keyExtractor = (item: Message) => item.data.name;
@@ -16,36 +16,22 @@ const InboxScreen = () => {
     const { messages, onRefresh } = useManageInbox();
     return (
         <Layout style={styles.root}>
-            <Content messages={messages} onRefresh={onRefresh} />
+            {messages ? (
+                <FlashList
+                    renderItem={renderItem}
+                    estimatedItemSize={250}
+                    data={messages?.data.children}
+                    onEndReached={onRefresh}
+                    onEndReachedThreshold={2}
+                    keyExtractor={keyExtractor}
+                    showsVerticalScrollIndicator={false}
+                />
+            ) : (
+                <View style={styles.spinnerContainer}>
+                    <Spinner />
+                </View>
+            )}
         </Layout>
-    );
-};
-
-const Content = ({
-    messages,
-    onRefresh,
-}: {
-    messages: Thing<Message> | undefined;
-    onRefresh: () => void;
-}) => {
-    if (!messages) {
-        return (
-            <View style={styles.spinnerContainer}>
-                <Spinner />
-            </View>
-        );
-    }
-
-    return (
-        <FlashList
-            renderItem={renderItem}
-            estimatedItemSize={250}
-            data={messages?.data.children}
-            onEndReached={onRefresh}
-            onEndReachedThreshold={2}
-            keyExtractor={keyExtractor}
-            showsVerticalScrollIndicator={false}
-        />
     );
 };
 

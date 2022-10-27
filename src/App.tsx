@@ -9,6 +9,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { ApplicationProvider, IconRegistry } from '@ui-kitten/components';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
 
+import { SafeArea } from '@coconut/generic';
 import { StackNavigator, navigationRef } from '@coconut/navigation';
 import { createStore } from '@coconut/state';
 
@@ -23,7 +24,9 @@ const App = () => {
             <ApplicationProvider {...eva} theme={eva.dark}>
                 <NavigationContainer ref={navigationRef}>
                     <MenuProvider>
-                        <StackNavigator />
+                        <SafeArea>
+                            <StackNavigator />
+                        </SafeArea>
                     </MenuProvider>
                 </NavigationContainer>
             </ApplicationProvider>
