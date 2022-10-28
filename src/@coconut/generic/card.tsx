@@ -1,14 +1,22 @@
 import React, { PropsWithChildren } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 
 import { useTheme } from '@ui-kitten/components';
 
 import { Dimensions } from '@coconut/branding';
 
-const Card = ({ children }: PropsWithChildren) => {
+interface Props extends PropsWithChildren {
+    onPress?: () => void;
+}
+
+const Card = ({ children, onPress }: Props) => {
     const styles = useStyles();
 
-    return <View style={styles.root}>{children}</View>;
+    return (
+        <TouchableOpacity style={styles.root} onPress={onPress}>
+            {children}
+        </TouchableOpacity>
+    );
 };
 
 const useStyles = () => {

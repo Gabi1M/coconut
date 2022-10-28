@@ -1,23 +1,13 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
 
-import { Layout } from '@ui-kitten/components';
-
-import { Dimensions } from '@coconut/branding';
+import { Screen } from '@coconut/generic';
 import { KarmaBadge, ProfileBadge } from '@coconut/profile';
 
 const ProfileScreen = () => (
-    <Layout style={styles.root}>
+    <Screen>
         <ProfileBadge />
         <KarmaBadge />
-    </Layout>
+    </Screen>
 );
-
-const styles = StyleSheet.create({
-    root: {
-        flex: 1,
-        paddingHorizontal: Dimensions.ternarySpacing,
-    },
-});
 
 export default ProfileScreen;

@@ -2,6 +2,8 @@ import React from 'react';
 
 import { Card } from '@coconut/generic';
 import { Listing } from '@coconut/models';
+import { useNavigateToComments as useNavigateToListing } from '@coconut/navigation';
+import { Resource, useClearResource, useFetchResource } from '@coconut/resource';
 
 import PostDetails from './details';
 import PostThumbnail from './thumbnail';
@@ -11,16 +13,30 @@ interface Props {
     listing: Listing;
 }
 
-const PostCard = ({ listing }: Props) => (
-    <Card>
-        <PostTitle title={listing.data.title} />
-        <PostThumbnail listing={listing} />
-        <PostDetails
-            upvotes={listing.data.ups}
-            voteRatio={listing.data.upvote_ratio}
-            subredditName={listing.data.subreddit_name_prefixed}
-        />
-    </Card>
-);
+const PostCard = ({ listing }: Props) => {
+    const fetchListing = useFetchResource(Resource.LISTING);
+    const clearListing = useClearResource(Resource.LISTING);
+    const navigateToListing = useNavigateToListing();
+    const onPress = () => {
+        clearListing();
+        fetchListing({
+            subreddit: listing.data.subreddit_name_prefixed,
+            id: listing.data.id,
+        });
+        navigateToListing();
+    };
+
+    return (
+        <Card onPress={onPress}>
+            <PostTitle title={listing.data.title} />
+            <PostThumbnail listing={listing} />
+            <PostDetails
+                upvotes={listing.data.ups}
+                voteRatio={listing.data.upvote_ratio}
+                subredditName={listing.data.subreddit_name_prefixed}
+            />
+        </Card>
+    );
+};
 
 export default PostCard;

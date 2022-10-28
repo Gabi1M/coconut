@@ -2,7 +2,13 @@ import React from 'react';
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import { HomeScreen, LoginScreen, LoginWebviewScreen } from '@coconut/screens';
+import {
+    HomeScreen,
+    ListingScreen,
+    LoginScreen,
+    LoginWebviewScreen,
+    SubredditsScreen,
+} from '@coconut/screens';
 
 import { StackParamList, StackRoutes } from './types';
 import { noHeaderOptions } from './utils';
@@ -14,6 +20,8 @@ const StackNavigator = () => (
         <Stack.Screen name={StackRoutes.HOME} component={HomeScreen} />
         <Stack.Screen name={StackRoutes.LOGIN} component={LoginScreen} />
         <Stack.Screen name={StackRoutes.LOGIN_WEBVIEW} component={LoginWebviewScreen} />
+        <Stack.Screen name={StackRoutes.SUBREDDITS} component={SubredditsScreen} />
+        <Stack.Screen name={StackRoutes.LISTING} component={ListingScreen} />
     </Stack.Navigator>
 );
 

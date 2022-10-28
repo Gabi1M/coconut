@@ -1,14 +1,14 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 
-import { Text } from '@ui-kitten/components';
+import { Text, TextProps } from '@ui-kitten/components';
 
-interface Props {
+interface Props extends Pick<TextProps, 'category'> {
     title: string;
 }
 
-const PostTitle = ({ title }: Props) => (
-    <Text style={styles.root} numberOfLines={2}>
+const PostTitle = ({ title, category }: Props) => (
+    <Text category={category} style={styles.root} numberOfLines={2}>
         {title}
     </Text>
 );

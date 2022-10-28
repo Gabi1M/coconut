@@ -7,4 +7,5 @@ export interface GlobalState {
     [Resource.PROFILE]: ResourceState<Resource.PROFILE>;
     [Resource.FEED]: ResourceState<Resource.FEED>;
     [Resource.MESSAGES]: ResourceState<Resource.MESSAGES>;
+    [Resource.LISTING]: ResourceState<Resource.LISTING>;
 }
