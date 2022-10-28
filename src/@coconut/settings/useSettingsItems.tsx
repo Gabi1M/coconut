@@ -1,7 +1,7 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 
-import { AsyncStorage, AsyncStorageKeys } from '@coconut/asyncStorage';
-import { useNavigateToLogin } from '@coconut/navigation';
+import { createLogoutAction } from '@coconut/profile';
 
 export interface SettingsItem {
     title: string;
@@ -11,17 +11,18 @@ export interface SettingsItem {
 }
 
 const useSettingsItems = (): SettingsItem[] => {
-    const navigateToLogin = useNavigateToLogin();
+    const dispatch = useDispatch();
+
+    const onLogout = () => {
+        dispatch(createLogoutAction());
+    };
 
     return [
         {
             title: 'Logout',
             description: 'Logout of your account',
             icon: 'person',
-            onPress: async () => {
-                await AsyncStorage.removeValue(AsyncStorageKeys.ACCESS_TOKEN);
-                navigateToLogin();
-            },
+            onPress: onLogout,
         },
     ];
 };

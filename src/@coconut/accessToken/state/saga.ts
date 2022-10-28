@@ -2,7 +2,7 @@ import { apply, call, delay, put, select, takeLatest } from 'redux-saga/effects'
 
 import { AsyncStorage, AsyncStorageKeys } from '@coconut/asyncStorage';
 import { AccessToken } from '@coconut/models';
-import { navigateToFeed } from '@coconut/navigation';
+import { navigateToFeed, removeAuthRoutes } from '@coconut/navigation';
 import {
     Resource,
     ResourceFetchAction,
@@ -26,6 +26,7 @@ function* fetchAccessTokenSaga(action: ResourceFetchAction<Resource.ACCESS_TOKEN
         ]);
         yield put(createResourceFetchAction(Resource.PROFILE));
         yield call(navigateToFeed);
+        yield call(removeAuthRoutes);
     }
 }
 

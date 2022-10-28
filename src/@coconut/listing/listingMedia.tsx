@@ -19,7 +19,7 @@ const ListingMedia = ({ listing }: Props) => {
         return null;
     }
 
-    return <Image style={styles.image} source={{ uri }} />;
+    return <Image style={styles.image} resizeMode='contain' source={{ uri }} />;
 };
 
 const useStyles = () => {

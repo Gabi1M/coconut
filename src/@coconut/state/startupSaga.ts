@@ -2,7 +2,7 @@ import { apply, call, put } from 'redux-saga/effects';
 
 import { AsyncStorage, AsyncStorageKeys } from '@coconut/asyncStorage';
 import { AccessToken } from '@coconut/models';
-import { navigateToFeed } from '@coconut/navigation';
+import { navigateToFeed, removeAuthRoutes } from '@coconut/navigation';
 import {
     Resource,
     createResourceFetchAction,
@@ -20,4 +20,5 @@ export function* startupSaga() {
     yield put(createResourceFetchSuccessAction(Resource.ACCESS_TOKEN, accessToken));
     yield put(createResourceFetchAction(Resource.PROFILE));
     yield call(navigateToFeed);
+    yield call(removeAuthRoutes);
 }

@@ -10,6 +10,7 @@ import {
     SubredditsScreen,
 } from '@coconut/screens';
 
+import NavigationHeader from './navigationHeader';
 import { StackParamList, StackRoutes } from './types';
 import { noHeaderOptions } from './utils';
 
@@ -21,7 +22,14 @@ const StackNavigator = () => (
         <Stack.Screen name={StackRoutes.LOGIN} component={LoginScreen} />
         <Stack.Screen name={StackRoutes.LOGIN_WEBVIEW} component={LoginWebviewScreen} />
         <Stack.Screen name={StackRoutes.SUBREDDITS} component={SubredditsScreen} />
-        <Stack.Screen name={StackRoutes.LISTING} component={ListingScreen} />
+        <Stack.Screen
+            name={StackRoutes.LISTING}
+            component={ListingScreen}
+            options={{
+                header: (props) => <NavigationHeader {...props} />,
+                headerShown: true,
+            }}
+        />
     </Stack.Navigator>
 );
 
