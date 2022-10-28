@@ -27,7 +27,7 @@ const useStyles = () => {
             marginVertical: Dimensions.ternarySpacing,
             padding: Dimensions.ternarySpacing,
             borderRadius: Dimensions.borderRadius,
-            backgroundColor: theme['color-basic-1100'],
+            backgroundColor: theme['color-basic-800'],
         },
     });
 };

@@ -1,8 +1,9 @@
 import React from 'react';
+import { StyleSheet } from 'react-native';
 
 import { BottomTabBarProps, createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import { BottomNavigation, BottomNavigationTab, Icon } from '@ui-kitten/components';
+import { BottomNavigation, BottomNavigationTab, Icon, useTheme } from '@ui-kitten/components';
 
 import {
     FeedScreen,
@@ -21,7 +22,7 @@ const BottomNavigator = () => (
     <Tab.Navigator
         screenOptions={noHeaderOptions}
         initialRouteName={BottomRoutes.FEED}
-        tabBar={BottomTabBar}
+        tabBar={(props) => <BottomTabBar {...props} />}
     >
         <Tab.Screen name={BottomRoutes.FEED} component={FeedScreen} />
         <Tab.Screen name={BottomRoutes.INBOX} component={InboxScreen} />
@@ -39,19 +40,32 @@ const IconMapping = {
     [BottomRoutes.SETTINGS]: 'settings-outline',
 };
 
-const BottomTabBar = ({ navigation, state }: BottomTabBarProps) => (
-    <BottomNavigation
-        selectedIndex={state.index}
-        onSelect={(index) => navigation.navigate(state.routeNames[index])}
-    >
-        {state.routeNames.map((route, index) => (
-            <BottomNavigationTab
-                key={index}
-                title={route}
-                icon={(props) => <Icon name={IconMapping[route as BottomRoutes]} {...props} />}
-            />
-        ))}
-    </BottomNavigation>
-);
+const BottomTabBar = ({ navigation, state }: BottomTabBarProps) => {
+    const styles = useStyles();
+    return (
+        <BottomNavigation
+            style={styles.tabBar}
+            selectedIndex={state.index}
+            onSelect={(index) => navigation.navigate(state.routeNames[index])}
+        >
+            {state.routeNames.map((route, index) => (
+                <BottomNavigationTab
+                    key={index}
+                    title={route}
+                    icon={(props) => <Icon name={IconMapping[route as BottomRoutes]} {...props} />}
+                />
+            ))}
+        </BottomNavigation>
+    );
+};
+
+const useStyles = () => {
+    const theme = useTheme();
+    return StyleSheet.create({
+        tabBar: {
+            backgroundColor: theme['color-basic-1100'],
+        },
+    });
+};
 
 export default BottomNavigator;

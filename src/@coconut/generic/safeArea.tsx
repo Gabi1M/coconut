@@ -15,7 +15,7 @@ const useStyles = () => {
     return StyleSheet.create({
         root: {
             flex: 1,
-            backgroundColor: theme['color-basic-800'],
+            backgroundColor: theme['color-basic-1100'],
         },
     });
 };

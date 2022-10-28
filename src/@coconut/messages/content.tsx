@@ -38,7 +38,7 @@ const useStyles = () => {
 
     const styles = StyleSheet.create({
         htmlRender: {
-            backgroundColor: theme['color-basic-1000'],
+            backgroundColor: theme['color-basic-700'],
             borderRadius: Dimensions.borderRadius,
             padding: Dimensions.ternarySpacing,
         },

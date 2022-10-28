@@ -39,7 +39,7 @@ const useStyles = () => {
 
     return StyleSheet.create({
         root: {
-            backgroundColor: theme['color-basic-1100'],
+            backgroundColor: theme['color-basic-800'],
             borderRadius: Dimensions.borderRadius,
             padding: Dimensions.ternarySpacing,
             flexDirection: 'row',
@@ -47,7 +47,7 @@ const useStyles = () => {
             alignItems: 'center',
         },
         container: {
-            backgroundColor: theme['color-basic-1000'],
+            backgroundColor: theme['color-basic-700'],
             borderRadius: Dimensions.borderRadius,
             padding: Dimensions.ternarySpacing,
             width: '30%',

@@ -26,7 +26,7 @@ const useStyles = () => {
     const { height } = useWindowDimensions();
     return StyleSheet.create({
         image: {
-            height: (40 * height) / 100,
+            height: (30 * height) / 100,
             borderRadius: Dimensions.borderRadius,
         },
     });
