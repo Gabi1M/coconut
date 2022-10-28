@@ -84,4 +84,7 @@ export interface ListingFetchParams {
     id: string;
 }
 
-export type ListingAndComments = [Thing<Listing>, Thing<Comment>];
+export type ListingAndComments = {
+    listing: Thing<Listing>;
+    comments: Thing<Comment>;
+};

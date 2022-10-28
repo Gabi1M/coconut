@@ -2,7 +2,15 @@
 import { Buffer } from '@craftzdog/react-native-buffer';
 
 import { RedditInfo } from '@coconut/info';
-import { AccessToken, Listing, ListingAndComments, Message, Profile, Thing } from '@coconut/models';
+import {
+    AccessToken,
+    Comment,
+    Listing,
+    ListingAndComments,
+    Message,
+    Profile,
+    Thing,
+} from '@coconut/models';
 import {
     Resource,
     ResourceDeleteParams,
@@ -162,13 +170,17 @@ export class Api {
         return this.get<Thing<Message>>(`https://oauth.reddit.com/message/inbox`, searchParams);
     }
 
-    async fetchListing(params: ResourceFetchParams[Resource.LISTING]) {
+    async fetchListing(params: ResourceFetchParams[Resource.LISTING]): Promise<ListingAndComments> {
         const searchParams = new URLSearchParams();
         searchParams.append('raw_json', '1');
-        return this.get<ListingAndComments>(
+        const listingAndComments = await this.get<[Thing<Listing>, Thing<Comment>]>(
             `https://oauth.reddit.com/${params.subreddit}/comments/${params.id}`,
             searchParams,
         );
+        return {
+            listing: listingAndComments[0],
+            comments: listingAndComments[1],
+        };
     }
 
     async fetchResource<T extends Resource = Resource>(
