@@ -79,9 +79,9 @@ export interface Comment {
     };
 }
 
-export interface CommentsFetchParams {
+export interface ListingFetchParams {
     subreddit: string;
     id: string;
 }
 
-export type Comments = [Thing<Listing>, Thing<Comment>];
+export type ListingAndComments = [Thing<Listing>, Thing<Comment>];

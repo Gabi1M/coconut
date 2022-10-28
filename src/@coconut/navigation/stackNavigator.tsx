@@ -3,8 +3,8 @@ import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import {
-    CommentsScreen,
     HomeScreen,
+    ListingScreen,
     LoginScreen,
     LoginWebviewScreen,
     SubredditsScreen,
@@ -21,7 +21,7 @@ const StackNavigator = () => (
         <Stack.Screen name={StackRoutes.LOGIN} component={LoginScreen} />
         <Stack.Screen name={StackRoutes.LOGIN_WEBVIEW} component={LoginWebviewScreen} />
         <Stack.Screen name={StackRoutes.SUBREDDITS} component={SubredditsScreen} />
-        <Stack.Screen name={StackRoutes.COMMENTS} component={CommentsScreen} />
+        <Stack.Screen name={StackRoutes.LISTING} component={ListingScreen} />
     </Stack.Navigator>
 );
 

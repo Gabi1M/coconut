@@ -2,8 +2,8 @@ import { applyMiddleware, combineReducers, createStore as createReduxStore } fro
 import createSagaMiddleware from 'redux-saga';
 
 import { accessTokenReducer, accessTokenSaga } from '@coconut/accessToken';
-import { commentsReducer, commentsSaga } from '@coconut/comments';
 import { feedReducer, feedSaga } from '@coconut/feed';
+import { listingReducer, listingSaga } from '@coconut/listing';
 import { messagesReducer, messagesSaga } from '@coconut/messages';
 import { profileReducer, profileSaga } from '@coconut/profile';
 import { Resource } from '@coconut/resource';
@@ -17,7 +17,7 @@ export const createStore = () => {
         profileSaga,
         feedSaga,
         messagesSaga,
-        commentsSaga,
+        listingSaga,
         startupSaga,
     ];
 
@@ -28,7 +28,7 @@ export const createStore = () => {
             [Resource.PROFILE]: profileReducer,
             [Resource.FEED]: feedReducer,
             [Resource.MESSAGES]: messagesReducer,
-            [Resource.COMMENTS]: commentsReducer,
+            [Resource.LISTING]: listingReducer,
         }),
         applyMiddleware(sagaMiddleware),
     );

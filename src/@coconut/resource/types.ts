@@ -1,10 +1,10 @@
 import {
     AccessToken,
     AccessTokenFetchParams,
-    Comments,
-    CommentsFetchParams,
     FeedFetchParams,
     Listing,
+    ListingAndComments,
+    ListingFetchParams,
     Message,
     MessagesFetchParams,
     Profile,
@@ -16,7 +16,7 @@ export enum Resource {
     PROFILE = 'profile',
     FEED = 'feed',
     MESSAGES = 'messages',
-    COMMENTS = 'comments',
+    LISTING = 'listing',
 }
 
 export type ResourceFetchDataType = {
@@ -24,7 +24,7 @@ export type ResourceFetchDataType = {
     [Resource.PROFILE]: Profile;
     [Resource.FEED]: Thing<Listing>;
     [Resource.MESSAGES]: Thing<Message>;
-    [Resource.COMMENTS]: Comments;
+    [Resource.LISTING]: ListingAndComments;
 };
 
 export type ResourceSetDataType = {
@@ -32,7 +32,7 @@ export type ResourceSetDataType = {
     [Resource.PROFILE]: undefined;
     [Resource.FEED]: undefined;
     [Resource.MESSAGES]: undefined;
-    [Resource.COMMENTS]: undefined;
+    [Resource.LISTING]: undefined;
 };
 
 export type ResourceUpdateDataType = {
@@ -40,7 +40,7 @@ export type ResourceUpdateDataType = {
     [Resource.PROFILE]: undefined;
     [Resource.FEED]: undefined;
     [Resource.MESSAGES]: undefined;
-    [Resource.COMMENTS]: undefined;
+    [Resource.LISTING]: undefined;
 };
 
 export type ResourceDeleteDataType = {
@@ -48,7 +48,7 @@ export type ResourceDeleteDataType = {
     [Resource.PROFILE]: undefined;
     [Resource.FEED]: undefined;
     [Resource.MESSAGES]: undefined;
-    [Resource.COMMENTS]: undefined;
+    [Resource.LISTING]: undefined;
 };
 
 export type ResourceFetchParams = {
@@ -56,7 +56,7 @@ export type ResourceFetchParams = {
     [Resource.PROFILE]: undefined;
     [Resource.FEED]: FeedFetchParams;
     [Resource.MESSAGES]: MessagesFetchParams;
-    [Resource.COMMENTS]: CommentsFetchParams;
+    [Resource.LISTING]: ListingFetchParams;
 };
 
 export type ResourceSetParams = {
@@ -64,7 +64,7 @@ export type ResourceSetParams = {
     [Resource.PROFILE]: undefined;
     [Resource.FEED]: undefined;
     [Resource.MESSAGES]: undefined;
-    [Resource.COMMENTS]: undefined;
+    [Resource.LISTING]: undefined;
 };
 
 export type ResourceUpdateParams = {
@@ -72,7 +72,7 @@ export type ResourceUpdateParams = {
     [Resource.PROFILE]: undefined;
     [Resource.FEED]: undefined;
     [Resource.MESSAGES]: undefined;
-    [Resource.COMMENTS]: undefined;
+    [Resource.LISTING]: undefined;
 };
 
 export type ResourceDeleteParams = {
@@ -80,7 +80,7 @@ export type ResourceDeleteParams = {
     [Resource.PROFILE]: undefined;
     [Resource.FEED]: undefined;
     [Resource.MESSAGES]: undefined;
-    [Resource.COMMENTS]: undefined;
+    [Resource.LISTING]: undefined;
 };
 
 export interface BaseAction {

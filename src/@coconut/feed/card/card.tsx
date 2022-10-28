@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Card } from '@coconut/generic';
 import { Listing } from '@coconut/models';
-import { useNavigateToComments } from '@coconut/navigation';
+import { useNavigateToComments as useNavigateToListing } from '@coconut/navigation';
 import { Resource, useClearResource, useFetchResource } from '@coconut/resource';
 
 import PostDetails from './details';
@@ -14,16 +14,16 @@ interface Props {
 }
 
 const PostCard = ({ listing }: Props) => {
-    const fetchComments = useFetchResource(Resource.COMMENTS);
-    const clearComments = useClearResource(Resource.COMMENTS);
-    const navigateToComments = useNavigateToComments();
+    const fetchListing = useFetchResource(Resource.LISTING);
+    const clearListing = useClearResource(Resource.LISTING);
+    const navigateToListing = useNavigateToListing();
     const onPress = () => {
-        clearComments();
-        fetchComments({
+        clearListing();
+        fetchListing({
             subreddit: listing.data.subreddit_name_prefixed,
             id: listing.data.id,
         });
-        navigateToComments();
+        navigateToListing();
     };
 
     return (

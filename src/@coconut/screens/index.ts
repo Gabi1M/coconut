@@ -7,4 +7,4 @@ export { default as SearchScreen } from './search';
 export { default as SettingsScreen } from './settings';
 export { default as FeedScreen } from './feed';
 export { default as SubredditsScreen } from './subreddits';
-export { default as CommentsScreen } from './comments';
+export { default as ListingScreen } from './listing';

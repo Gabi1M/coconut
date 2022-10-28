@@ -3,11 +3,10 @@ import { StyleSheet, View } from 'react-native';
 
 import { FlashList, ListRenderItem } from '@shopify/flash-list';
 
-import { Layout, Spinner } from '@ui-kitten/components';
+import { Spinner } from '@ui-kitten/components';
 
-import { Dimensions } from '@coconut/branding';
 import { ListingCard, useManageFeed } from '@coconut/feed';
-import { PopupMenu } from '@coconut/generic';
+import { PopupMenu, Screen } from '@coconut/generic';
 import { Listing, PostSorting } from '@coconut/models';
 
 const renderItem: ListRenderItem<Listing> = ({ item }) => <ListingCard listing={item} />;
@@ -17,7 +16,7 @@ const labelExtractor = (value: PostSorting) => value.toUpperCase();
 const FeedScreen = () => {
     const { feed, postSorting, postSortingOptions, onRefresh, setPostSorting } = useManageFeed();
     return (
-        <Layout style={styles.root}>
+        <Screen>
             <View style={styles.header}>
                 <PopupMenu
                     data={postSortingOptions}
@@ -42,15 +41,11 @@ const FeedScreen = () => {
                     <Spinner />
                 </View>
             )}
-        </Layout>
+        </Screen>
     );
 };
 
 const styles = StyleSheet.create({
-    root: {
-        flex: 1,
-        paddingHorizontal: Dimensions.ternarySpacing,
-    },
     spinnerContainer: {
         flex: 1,
         justifyContent: 'center',

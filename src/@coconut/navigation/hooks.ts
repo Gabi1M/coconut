@@ -21,7 +21,7 @@ export const useNavigateToSubreddits = () => {
 
 export const useNavigateToComments = () => {
     const navigation = useNavigation();
-    return () => navigation.navigate(StackRoutes.COMMENTS);
+    return () => navigation.navigate(StackRoutes.LISTING);
 };
 
 export const useNavigateToFeed = () => {

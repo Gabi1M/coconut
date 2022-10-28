@@ -1,19 +1,13 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
 
-import { Layout, Text } from '@ui-kitten/components';
+import { Text } from '@ui-kitten/components';
+
+import { Screen } from '@coconut/generic';
 
 const SubredditsScreen = () => (
-    <Layout style={styles.root}>
+    <Screen>
         <Text category='h1'>SUBREDDITS</Text>
-    </Layout>
+    </Screen>
 );
-
-const styles = StyleSheet.create({
-    root: {
-        flex: 1,
-        paddingHorizontal: 10,
-    },
-});
 
 export default SubredditsScreen;
