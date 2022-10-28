@@ -1,12 +1,12 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { View } from 'react-native';
 
-import { Spinner, Text } from '@ui-kitten/components';
+import { Spinner } from '@ui-kitten/components';
 
-import { Dimensions } from '@coconut/branding';
 import { ListingAndComments } from '@coconut/models';
 import { Resource, useSelectResourceFetchData } from '@coconut/resource';
 
+import ListingContent from './listingContent';
 import ListingMedia from './listingMedia';
 
 const ListingHeader = () => {
@@ -21,17 +21,9 @@ const ListingHeader = () => {
     return (
         <View>
             <ListingMedia listing={listing} />
-            <Text style={styles.title} category='h4'>
-                {listing.data.title}
-            </Text>
+            <ListingContent listing={listing} />
         </View>
     );
 };
-
-const styles = StyleSheet.create({
-    title: {
-        marginVertical: Dimensions.ternarySpacing,
-    },
-});
 
 export default ListingHeader;
