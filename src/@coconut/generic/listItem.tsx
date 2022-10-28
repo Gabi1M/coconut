@@ -51,7 +51,7 @@ const useStyles = () => {
             flexDirection: 'row',
             justifyContent: 'space-between',
             alignItems: 'center',
-            backgroundColor: theme['color-basic-1100'],
+            backgroundColor: theme['color-basic-800'],
             borderRadius: Dimensions.borderRadius,
         },
         container: {

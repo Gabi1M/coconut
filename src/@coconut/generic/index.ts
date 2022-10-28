@@ -4,3 +4,4 @@ export { default as SafeArea } from './safeArea';
 export { default as PopupMenu } from './popupMenu';
 export { default as LoadingSpinner } from './loadingSpinner';
 export { default as Screen } from './screen';
+export { default as Divider } from './divider';

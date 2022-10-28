@@ -6,6 +6,7 @@ import { FlashList, ListRenderItem } from '@shopify/flash-list';
 import { Spinner, Text } from '@ui-kitten/components';
 
 import { Dimensions } from '@coconut/branding';
+import { Divider } from '@coconut/generic';
 import { Comment, ListingAndComments } from '@coconut/models';
 import { Resource, useSelectResourceFetchData } from '@coconut/resource';
 
@@ -25,7 +26,7 @@ const ListingComments = () => {
     const comments = listingAndComments.comments.data.children;
     return (
         <View style={styles.root}>
-            <View style={styles.divider} />
+            <Divider />
             <Text style={styles.text}>Comments</Text>
             <FlashList
                 renderItem={renderItem}
@@ -44,10 +45,6 @@ const styles = StyleSheet.create({
     },
     text: {
         marginVertical: Dimensions.ternarySpacing,
-    },
-    divider: {
-        borderBottomWidth: 1,
-        borderBottomColor: 'white',
     },
 });
 

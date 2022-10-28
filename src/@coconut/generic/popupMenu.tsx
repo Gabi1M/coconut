@@ -46,7 +46,7 @@ const useStyles = () => {
     return StyleSheet.create({
         options: {
             paddingBottom: 20,
-            backgroundColor: theme['color-basic-700'],
+            backgroundColor: theme['color-basic-900'],
             borderRadius: 10,
         },
         menuTriggerText: {
