@@ -108,7 +108,3 @@ export interface Subreddit {
         allow_predictions_tournament: boolean;
     };
 }
-
-export interface SubredditsFetchParams {
-    query: string;
-}

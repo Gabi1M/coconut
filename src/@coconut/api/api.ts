@@ -9,12 +9,12 @@ import {
     ListingAndComments,
     Message,
     Profile,
-    Subreddit,
     Thing,
 } from '@coconut/models';
 import {
     Resource,
     ResourceDeleteParams,
+    ResourceFetchDataType,
     ResourceFetchParams,
     ResourceSetParams,
     ResourceUpdateParams,
@@ -184,12 +184,15 @@ export class Api {
         };
     }
 
-    async fetchSubreddits(params: ResourceFetchParams[Resource.SUBREDDITS]) {
+    async search(params: ResourceFetchParams[Resource.SEARCH]) {
         const searchParams = new URLSearchParams();
         searchParams.append('raw_json', '1');
         searchParams.append('q', params.query);
-        return this.get<Thing<Subreddit>>(
-            `https://oauth.reddit.com/subreddits/search`,
+        if (params.types && params.types.length) {
+            searchParams.append('type', params.types.join(','));
+        }
+        return this.get<ResourceFetchDataType[Resource.SEARCH]>(
+            `https://oauth.reddit.com/search`,
             searchParams,
         );
     }
@@ -214,8 +217,8 @@ export class Api {
             case Resource.LISTING: {
                 return this.fetchListing(params as ResourceFetchParams[Resource.LISTING]);
             }
-            case Resource.SUBREDDITS: {
-                return this.fetchSubreddits(params as ResourceFetchParams[Resource.SUBREDDITS]);
+            case Resource.SEARCH: {
+                return this.search(params as ResourceFetchParams[Resource.SEARCH]);
             }
             default: {
                 return undefined;

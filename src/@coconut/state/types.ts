@@ -8,5 +8,5 @@ export interface GlobalState {
     [Resource.FEED]: ResourceState<Resource.FEED>;
     [Resource.MESSAGES]: ResourceState<Resource.MESSAGES>;
     [Resource.LISTING]: ResourceState<Resource.LISTING>;
-    [Resource.SUBREDDITS]: ResourceState<Resource.SUBREDDITS>;
+    [Resource.SEARCH]: ResourceState<Resource.SEARCH>;
 }
