@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 
-import { Icon, Input, useTheme } from '@ui-kitten/components';
+import { Icon, Input } from '@ui-kitten/components';
 
 import { Dimensions } from '@coconut/branding';
 import { Resource, createResourceFetchAction } from '@coconut/resource';
