@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
+import { useNavigateToDebug } from '@coconut/navigation';
 import { createLogoutAction } from '@coconut/profile';
 
 export interface SettingsItem {
@@ -12,6 +13,7 @@ export interface SettingsItem {
 
 const useSettingsItems = (): SettingsItem[] => {
     const dispatch = useDispatch();
+    const navigateToDebug = useNavigateToDebug();
 
     const onLogout = () => {
         dispatch(createLogoutAction());
@@ -23,6 +25,12 @@ const useSettingsItems = (): SettingsItem[] => {
             description: 'Logout of your account',
             icon: 'person',
             onPress: onLogout,
+        },
+        {
+            title: 'Debug',
+            description: 'View debug informations',
+            icon: 'alert-circle-outline',
+            onPress: navigateToDebug,
         },
     ];
 };
