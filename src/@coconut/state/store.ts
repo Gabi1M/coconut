@@ -8,6 +8,7 @@ import { messagesReducer, messagesSaga } from '@coconut/messages';
 import { profileReducer, profileSaga } from '@coconut/profile';
 import { Resource } from '@coconut/resource';
 import { searchReducer, searchSaga } from '@coconut/search';
+import { subredditReducer, subredditSaga } from '@coconut/subreddit';
 
 import { startupSaga } from './startupSaga';
 import { GlobalState } from './types';
@@ -20,6 +21,7 @@ export const createStore = () => {
         messagesSaga,
         listingSaga,
         searchSaga,
+        subredditSaga,
         startupSaga,
     ];
 
@@ -32,6 +34,7 @@ export const createStore = () => {
             [Resource.MESSAGES]: messagesReducer,
             [Resource.LISTING]: listingReducer,
             [Resource.SEARCH]: searchReducer,
+            [Resource.SUBREDDIT]: subredditReducer,
         }),
         applyMiddleware(sagaMiddleware),
     );

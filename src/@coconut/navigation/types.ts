@@ -9,6 +9,7 @@ export enum StackRoutes {
     SUBREDDITS = 'Subreddits',
     LISTING = 'Listing',
     DEBUG = 'Debug',
+    SUBREDDIT = 'Subreddit',
 }
 
 export enum BottomRoutes {
@@ -26,6 +27,9 @@ export type StackParamList = {
     [StackRoutes.SUBREDDITS]: undefined;
     [StackRoutes.LISTING]: undefined;
     [StackRoutes.DEBUG]: undefined;
+    [StackRoutes.SUBREDDIT]: {
+        subreddit: string;
+    };
 };
 
 export type BottomTabParamList = {
@@ -43,6 +47,7 @@ export type StackScreenProps = {
     [StackRoutes.SUBREDDITS]: NativeStackScreenProps<StackParamList, StackRoutes.SUBREDDITS>;
     [StackRoutes.LISTING]: NativeStackScreenProps<StackParamList, StackRoutes.LISTING>;
     [StackRoutes.DEBUG]: NativeStackScreenProps<StackParamList, StackRoutes.DEBUG>;
+    [StackRoutes.SUBREDDIT]: NativeStackScreenProps<StackParamList, StackRoutes.SUBREDDIT>;
 };
 
 export type BottomScreenProps = {

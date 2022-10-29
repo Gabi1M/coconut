@@ -10,6 +10,7 @@ import {
     Profile,
     SearchParams,
     Subreddit,
+    SubredditFetchParams,
     Thing,
 } from '@coconut/models';
 
@@ -20,6 +21,7 @@ export enum Resource {
     MESSAGES = 'messages',
     LISTING = 'listing',
     SEARCH = 'search',
+    SUBREDDIT = 'subreddit',
 }
 
 export type ResourceFetchDataType = {
@@ -29,6 +31,7 @@ export type ResourceFetchDataType = {
     [Resource.MESSAGES]: Thing<Message>;
     [Resource.LISTING]: ListingAndComments;
     [Resource.SEARCH]: Thing<Subreddit | Listing>;
+    [Resource.SUBREDDIT]: Thing<Listing>;
 };
 
 export type ResourceSetDataType = {
@@ -38,6 +41,7 @@ export type ResourceSetDataType = {
     [Resource.MESSAGES]: undefined;
     [Resource.LISTING]: undefined;
     [Resource.SEARCH]: undefined;
+    [Resource.SUBREDDIT]: undefined;
 };
 
 export type ResourceUpdateDataType = {
@@ -47,6 +51,7 @@ export type ResourceUpdateDataType = {
     [Resource.MESSAGES]: undefined;
     [Resource.LISTING]: undefined;
     [Resource.SEARCH]: undefined;
+    [Resource.SUBREDDIT]: undefined;
 };
 
 export type ResourceDeleteDataType = {
@@ -56,6 +61,7 @@ export type ResourceDeleteDataType = {
     [Resource.MESSAGES]: undefined;
     [Resource.LISTING]: undefined;
     [Resource.SEARCH]: undefined;
+    [Resource.SUBREDDIT]: undefined;
 };
 
 export type ResourceFetchParams = {
@@ -65,6 +71,7 @@ export type ResourceFetchParams = {
     [Resource.MESSAGES]: MessagesFetchParams;
     [Resource.LISTING]: ListingFetchParams;
     [Resource.SEARCH]: SearchParams;
+    [Resource.SUBREDDIT]: SubredditFetchParams;
 };
 
 export type ResourceSetParams = {
@@ -74,6 +81,7 @@ export type ResourceSetParams = {
     [Resource.MESSAGES]: undefined;
     [Resource.LISTING]: undefined;
     [Resource.SEARCH]: undefined;
+    [Resource.SUBREDDIT]: undefined;
 };
 
 export type ResourceUpdateParams = {
@@ -83,6 +91,7 @@ export type ResourceUpdateParams = {
     [Resource.MESSAGES]: undefined;
     [Resource.LISTING]: undefined;
     [Resource.SEARCH]: undefined;
+    [Resource.SUBREDDIT]: undefined;
 };
 
 export type ResourceDeleteParams = {
@@ -92,6 +101,7 @@ export type ResourceDeleteParams = {
     [Resource.MESSAGES]: undefined;
     [Resource.LISTING]: undefined;
     [Resource.SEARCH]: undefined;
+    [Resource.SUBREDDIT]: undefined;
 };
 
 export interface BaseAction {

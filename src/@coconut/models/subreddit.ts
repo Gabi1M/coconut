@@ -1,3 +1,4 @@
+import { PostSorting } from './listing';
 import { ThingItemKind } from './types';
 
 export interface Subreddit {
@@ -107,4 +108,10 @@ export interface Subreddit {
         user_is_moderator: boolean;
         allow_predictions_tournament: boolean;
     };
+}
+
+export interface SubredditFetchParams {
+    subreddit: string;
+    type: PostSorting;
+    after?: string;
 }
