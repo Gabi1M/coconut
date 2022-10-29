@@ -8,6 +8,7 @@ import {
     ListingScreen,
     LoginScreen,
     LoginWebviewScreen,
+    SubredditScreen,
     SubredditsScreen,
 } from '@coconut/screens';
 
@@ -34,6 +35,11 @@ const StackNavigator = () => (
         <Stack.Screen
             name={StackRoutes.DEBUG}
             component={DebugScreen}
+            options={withNavigationHeaderOptions}
+        />
+        <Stack.Screen
+            name={StackRoutes.SUBREDDIT}
+            component={SubredditScreen}
             options={withNavigationHeaderOptions}
         />
     </Stack.Navigator>

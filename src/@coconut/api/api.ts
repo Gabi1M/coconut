@@ -184,6 +184,19 @@ export class Api {
         };
     }
 
+    async fetchSubreddit(params: ResourceFetchParams[Resource.SUBREDDIT]) {
+        const searchParams = new URLSearchParams();
+        searchParams.append('raw_json', '1');
+        if (params?.after) {
+            searchParams.append('after', params.after);
+        }
+
+        return this.get<Thing<Listing>>(
+            `https://oauth.reddit.com/${params.subreddit}/${params.type}`,
+            searchParams,
+        );
+    }
+
     async search(params: ResourceFetchParams[Resource.SEARCH]) {
         const searchParams = new URLSearchParams();
         searchParams.append('raw_json', '1');
@@ -219,6 +232,9 @@ export class Api {
             }
             case Resource.SEARCH: {
                 return this.search(params as ResourceFetchParams[Resource.SEARCH]);
+            }
+            case Resource.SUBREDDIT: {
+                return this.fetchSubreddit(params as ResourceFetchParams[Resource.SUBREDDIT]);
             }
             default: {
                 return undefined;

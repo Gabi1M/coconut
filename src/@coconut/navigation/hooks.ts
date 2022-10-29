@@ -29,6 +29,11 @@ export const useNavigateToDebug = () => {
     return () => navigation.navigate(StackRoutes.DEBUG);
 };
 
+export const useNavigateToSubreddit = () => {
+    const navigation = useNavigation();
+    return (subreddit: string) => navigation.navigate(StackRoutes.SUBREDDIT, { subreddit });
+};
+
 export const useNavigateToFeed = () => {
     const navigation = useNavigation();
     return () =>

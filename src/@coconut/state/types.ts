@@ -9,4 +9,5 @@ export interface GlobalState {
     [Resource.MESSAGES]: ResourceState<Resource.MESSAGES>;
     [Resource.LISTING]: ResourceState<Resource.LISTING>;
     [Resource.SEARCH]: ResourceState<Resource.SEARCH>;
+    [Resource.SUBREDDIT]: ResourceState<Resource.SUBREDDIT>;
 }

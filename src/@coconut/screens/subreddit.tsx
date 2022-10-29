@@ -3,19 +3,22 @@ import { StyleSheet, View } from 'react-native';
 
 import { FlashList, ListRenderItem } from '@shopify/flash-list';
 
-import { Spinner } from '@ui-kitten/components';
+import { Spinner, Text } from '@ui-kitten/components';
 
-import { useManageFeed } from '@coconut/feed';
 import { SafeAreaScreen, SelectMenu } from '@coconut/generic';
 import { ListingCard } from '@coconut/listing';
 import { Listing, PostSorting } from '@coconut/models';
+import { StackRoutes, StackScreenProps } from '@coconut/navigation';
+import { useManageSubreddit } from '@coconut/subreddit';
 
 const renderItem: ListRenderItem<Listing> = ({ item }) => <ListingCard listing={item} />;
 const keyExtractor = (item: Listing) => item.data.name;
 const labelExtractor = (value: PostSorting) => value.toUpperCase();
 
-const FeedScreen = () => {
-    const { feed, postSorting, postSortingOptions, onRefresh, setPostSorting } = useManageFeed();
+const SubredditScreen = (props: StackScreenProps[StackRoutes.SUBREDDIT]) => {
+    const { listings, postSorting, postSortingOptions, onRefresh, setPostSorting } =
+        useManageSubreddit(props.route.params.subreddit);
+
     return (
         <SafeAreaScreen>
             <View style={styles.header}>
@@ -25,13 +28,13 @@ const FeedScreen = () => {
                     onChange={setPostSorting}
                     labelExtractor={labelExtractor}
                 />
-                <View style={styles.spacer} />
+                <Text>{props.route.params.subreddit}</Text>
             </View>
-            {feed ? (
+            {listings ? (
                 <FlashList
                     renderItem={renderItem}
                     estimatedItemSize={310}
-                    data={feed.data.children}
+                    data={listings.data.children}
                     onEndReached={onRefresh}
                     onEndReachedThreshold={2}
                     keyExtractor={keyExtractor}
@@ -54,10 +57,9 @@ const styles = StyleSheet.create({
     },
     header: {
         flexDirection: 'row',
-    },
-    spacer: {
-        flexGrow: 1,
+        justifyContent: 'space-between',
+        alignItems: 'center',
     },
 });
 
-export default FeedScreen;
+export default SubredditScreen;
