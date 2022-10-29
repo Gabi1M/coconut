@@ -6,7 +6,7 @@ import { FlashList, ListRenderItem } from '@shopify/flash-list';
 import { Spinner } from '@ui-kitten/components';
 
 import { ListingCard, useManageFeed } from '@coconut/feed';
-import { PopupMenu, Screen } from '@coconut/generic';
+import { PopupMenu, SafeAreaScreen } from '@coconut/generic';
 import { Listing, PostSorting } from '@coconut/models';
 
 const renderItem: ListRenderItem<Listing> = ({ item }) => <ListingCard listing={item} />;
@@ -16,7 +16,7 @@ const labelExtractor = (value: PostSorting) => value.toUpperCase();
 const FeedScreen = () => {
     const { feed, postSorting, postSortingOptions, onRefresh, setPostSorting } = useManageFeed();
     return (
-        <Screen>
+        <SafeAreaScreen>
             <View style={styles.header}>
                 <PopupMenu
                     data={postSortingOptions}
@@ -41,7 +41,7 @@ const FeedScreen = () => {
                     <Spinner />
                 </View>
             )}
-        </Screen>
+        </SafeAreaScreen>
     );
 };
 

@@ -4,6 +4,7 @@ import { WebView, WebViewNavigation } from 'react-native-webview';
 
 import CookieManager from '@react-native-cookies/cookies';
 
+import { SafeArea } from '@coconut/generic';
 import { RedditInfo } from '@coconut/info';
 import { Resource, useFetchResource } from '@coconut/resource';
 
@@ -33,14 +34,16 @@ const LoginWebviewScreen = () => {
     );
 
     return (
-        <WebView
-            incognito={true}
-            style={styles.root}
-            source={{ uri: RedditInfo.generateAuthUri() }}
-            onNavigationStateChange={onNavigationStateChange}
-            domStorageEnabled={false}
-            thirdPartyCookiesEnabled={false}
-        />
+        <SafeArea>
+            <WebView
+                incognito={true}
+                style={styles.root}
+                source={{ uri: RedditInfo.generateAuthUri() }}
+                onNavigationStateChange={onNavigationStateChange}
+                domStorageEnabled={false}
+                thirdPartyCookiesEnabled={false}
+            />
+        </SafeArea>
     );
 };
 

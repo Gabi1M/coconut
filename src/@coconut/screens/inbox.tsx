@@ -2,7 +2,7 @@ import React from 'react';
 
 import { FlashList, ListRenderItem } from '@shopify/flash-list';
 
-import { LoadingSpinner, Screen } from '@coconut/generic';
+import { LoadingSpinner, SafeAreaScreen } from '@coconut/generic';
 import { MessageCard, useManageInbox } from '@coconut/messages';
 import { Message } from '@coconut/models';
 
@@ -17,7 +17,7 @@ const InboxScreen = () => {
     }
 
     return (
-        <Screen>
+        <SafeAreaScreen>
             <FlashList
                 renderItem={renderItem}
                 estimatedItemSize={250}
@@ -27,7 +27,7 @@ const InboxScreen = () => {
                 keyExtractor={keyExtractor}
                 showsVerticalScrollIndicator={false}
             />
-        </Screen>
+        </SafeAreaScreen>
     );
 };
 

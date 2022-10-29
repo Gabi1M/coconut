@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Menu, MenuOption, MenuOptions, MenuTrigger, renderers } from 'react-native-popup-menu';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useTheme } from '@ui-kitten/components';
 
@@ -43,10 +44,11 @@ const PopupMenu = <T extends unknown>({ data, value, onChange, labelExtractor }:
 
 const useStyles = () => {
     const theme = useTheme();
+    const insets = useSafeAreaInsets();
     return StyleSheet.create({
         options: {
-            paddingBottom: 20,
             backgroundColor: theme['color-basic-900'],
+            paddingBottom: insets.bottom,
             borderRadius: 10,
         },
         menuTriggerText: {

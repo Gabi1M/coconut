@@ -2,12 +2,12 @@ import React from 'react';
 
 import { Text } from '@ui-kitten/components';
 
-import { Screen } from '@coconut/generic';
+import { SafeAreaScreen } from '@coconut/generic';
 
 const SearchScreen = () => (
-    <Screen>
+    <SafeAreaScreen>
         <Text category='h1'>SEARCH</Text>
-    </Screen>
+    </SafeAreaScreen>
 );
 
 export default SearchScreen;

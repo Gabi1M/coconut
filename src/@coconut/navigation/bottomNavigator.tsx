@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { SafeAreaView, StyleSheet } from 'react-native';
 
 import { BottomTabBarProps, createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
@@ -43,25 +43,32 @@ const IconMapping = {
 const BottomTabBar = ({ navigation, state }: BottomTabBarProps) => {
     const styles = useStyles();
     return (
-        <BottomNavigation
-            style={styles.tabBar}
-            selectedIndex={state.index}
-            onSelect={(index) => navigation.navigate(state.routeNames[index])}
-        >
-            {state.routeNames.map((route, index) => (
-                <BottomNavigationTab
-                    key={index}
-                    title={route}
-                    icon={(props) => <Icon name={IconMapping[route as BottomRoutes]} {...props} />}
-                />
-            ))}
-        </BottomNavigation>
+        <SafeAreaView style={styles.safeArea}>
+            <BottomNavigation
+                style={styles.tabBar}
+                selectedIndex={state.index}
+                onSelect={(index) => navigation.navigate(state.routeNames[index])}
+            >
+                {state.routeNames.map((route, index) => (
+                    <BottomNavigationTab
+                        key={index}
+                        title={route}
+                        icon={(props) => (
+                            <Icon name={IconMapping[route as BottomRoutes]} {...props} />
+                        )}
+                    />
+                ))}
+            </BottomNavigation>
+        </SafeAreaView>
     );
 };
 
 const useStyles = () => {
     const theme = useTheme();
     return StyleSheet.create({
+        safeArea: {
+            backgroundColor: theme['color-basic-1100'],
+        },
         tabBar: {
             backgroundColor: theme['color-basic-1100'],
         },

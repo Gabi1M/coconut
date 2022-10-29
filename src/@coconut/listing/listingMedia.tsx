@@ -28,6 +28,7 @@ const useStyles = () => {
         image: {
             height: (30 * height) / 100,
             borderRadius: Dimensions.borderRadius,
+            backgroundColor: 'black',
         },
     });
 };
