@@ -6,8 +6,8 @@ import { Spinner } from '@ui-kitten/components';
 import { ListingAndComments } from '@coconut/models';
 import { Resource, useSelectResourceFetchData } from '@coconut/resource';
 
-import ListingContent from './listingContent';
-import ListingMedia from './listingMedia';
+import ListingContent from './content';
+import ListingMedia from './media';
 
 const ListingHeader = () => {
     const listingAndComments = useSelectResourceFetchData(Resource.LISTING) as

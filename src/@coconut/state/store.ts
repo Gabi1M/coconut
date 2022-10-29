@@ -7,6 +7,7 @@ import { listingReducer, listingSaga } from '@coconut/listing';
 import { messagesReducer, messagesSaga } from '@coconut/messages';
 import { profileReducer, profileSaga } from '@coconut/profile';
 import { Resource } from '@coconut/resource';
+import { searchReducer, searchSaga } from '@coconut/search';
 
 import { startupSaga } from './startupSaga';
 import { GlobalState } from './types';
@@ -18,6 +19,7 @@ export const createStore = () => {
         feedSaga,
         messagesSaga,
         listingSaga,
+        searchSaga,
         startupSaga,
     ];
 
@@ -29,6 +31,7 @@ export const createStore = () => {
             [Resource.FEED]: feedReducer,
             [Resource.MESSAGES]: messagesReducer,
             [Resource.LISTING]: listingReducer,
+            [Resource.SEARCH]: searchReducer,
         }),
         applyMiddleware(sagaMiddleware),
     );

@@ -1,18 +1,24 @@
-import React, { PropsWithChildren } from 'react';
+import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Menu, MenuOption, MenuOptions, MenuTrigger, renderers } from 'react-native-popup-menu';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useTheme } from '@ui-kitten/components';
 
-interface Props<T extends unknown> extends PropsWithChildren {
+interface Props<T extends unknown> {
     data: T[];
+    value: T;
     onChange: (value: T) => void;
     labelExtractor: (value: T) => string;
 }
 
-const PopupMenu = <T extends unknown>({ data, onChange, labelExtractor, children }: Props<T>) => {
+const SelectMenu = <T extends unknown>({ data, value, onChange, labelExtractor }: Props<T>) => {
     const styles = useStyles();
+
+    const menuTriggerStyles = {
+        triggerText: styles.menuTriggerText,
+        triggerWrapper: styles.menuTriggerContainer,
+    };
 
     const menuOptionStyles = {
         optionText: styles.menuOptionText,
@@ -21,7 +27,7 @@ const PopupMenu = <T extends unknown>({ data, onChange, labelExtractor, children
 
     return (
         <Menu renderer={renderers.SlideInMenu}>
-            <MenuTrigger>{children}</MenuTrigger>
+            <MenuTrigger customStyles={menuTriggerStyles} text={labelExtractor(value)} />
             <MenuOptions optionsContainerStyle={styles.options}>
                 {data.map((item, index) => (
                     <MenuOption
@@ -45,6 +51,13 @@ const useStyles = () => {
             paddingBottom: insets.bottom,
             borderRadius: 10,
         },
+        menuTriggerText: {
+            color: theme['text-basic-color'],
+            fontSize: 20,
+        },
+        menuTriggerContainer: {
+            padding: 5,
+        },
         menuOptionText: {
             color: theme['text-basic-color'],
         },
@@ -55,4 +68,4 @@ const useStyles = () => {
     });
 };
 
-export default PopupMenu;
+export default SelectMenu;

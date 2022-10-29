@@ -2,8 +2,9 @@
 import { Comment } from './comment';
 import { Listing } from './listing';
 import { Message } from './message';
+import { Subreddit } from './subreddit';
 
-export interface Thing<T extends Listing | Message | Comment> {
+export interface Thing<T extends Listing | Message | Comment | Subreddit> {
     kind: string;
     data: {
         after?: string;
