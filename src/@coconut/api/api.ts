@@ -9,6 +9,7 @@ import {
     ListingAndComments,
     Message,
     Profile,
+    Subreddit,
     Thing,
 } from '@coconut/models';
 import {
@@ -183,6 +184,16 @@ export class Api {
         };
     }
 
+    async fetchSubreddits(params: ResourceFetchParams[Resource.SUBREDDITS]) {
+        const searchParams = new URLSearchParams();
+        searchParams.append('raw_json', '1');
+        searchParams.append('q', params.query);
+        return this.get<Thing<Subreddit>>(
+            `https://oauth.reddit.com/subreddits/search`,
+            searchParams,
+        );
+    }
+
     async fetchResource<T extends Resource = Resource>(
         resource: T,
         params?: ResourceFetchParams[T],
@@ -202,6 +213,9 @@ export class Api {
             }
             case Resource.LISTING: {
                 return this.fetchListing(params as ResourceFetchParams[Resource.LISTING]);
+            }
+            case Resource.SUBREDDITS: {
+                return this.fetchSubreddits(params as ResourceFetchParams[Resource.SUBREDDITS]);
             }
             default: {
                 return undefined;
