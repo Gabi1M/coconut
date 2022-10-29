@@ -8,3 +8,4 @@ export { default as SettingsScreen } from './settings';
 export { default as FeedScreen } from './feed';
 export { default as SubredditsScreen } from './subreddits';
 export { default as ListingScreen } from './listing';
+export { default as DebugScreen } from './debug';

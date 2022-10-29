@@ -3,6 +3,7 @@ import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import {
+    DebugScreen,
     HomeScreen,
     ListingScreen,
     LoginScreen,
@@ -28,6 +29,11 @@ const StackNavigator = () => (
         <Stack.Screen
             name={StackRoutes.LISTING}
             component={ListingScreen}
+            options={withNavigationHeaderOptions}
+        />
+        <Stack.Screen
+            name={StackRoutes.DEBUG}
+            component={DebugScreen}
             options={withNavigationHeaderOptions}
         />
     </Stack.Navigator>

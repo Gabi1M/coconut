@@ -24,6 +24,11 @@ export const useNavigateToComments = () => {
     return () => navigation.navigate(StackRoutes.LISTING);
 };
 
+export const useNavigateToDebug = () => {
+    const navigation = useNavigation();
+    return () => navigation.navigate(StackRoutes.DEBUG);
+};
+
 export const useNavigateToFeed = () => {
     const navigation = useNavigation();
     return () =>

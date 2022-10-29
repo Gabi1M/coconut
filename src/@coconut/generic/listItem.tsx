@@ -9,7 +9,7 @@ interface Props {
     title: string;
     description?: string;
     icon?: string;
-    onPress: () => void;
+    onPress?: () => void;
 }
 
 const ListItem = ({ title, description, icon, onPress }: Props) => {
@@ -32,11 +32,13 @@ const ListItem = ({ title, description, icon, onPress }: Props) => {
                     ) : null}
                 </View>
             </View>
-            <Icon
-                style={styles.chevron}
-                fill={theme['color-basic-100']}
-                name='chevron-right-outline'
-            />
+            {onPress ? (
+                <Icon
+                    style={styles.chevron}
+                    fill={theme['color-basic-100']}
+                    name='chevron-right-outline'
+                />
+            ) : undefined}
         </TouchableOpacity>
     );
 };
