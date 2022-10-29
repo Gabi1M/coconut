@@ -1,11 +1,10 @@
 import React from 'react';
-import { ScrollView, StyleSheet, useWindowDimensions } from 'react-native';
+import { ScrollView, StyleSheet, View, useWindowDimensions } from 'react-native';
 import { RenderHTML } from 'react-native-render-html';
 
 import { Text, useTheme } from '@ui-kitten/components';
 
 import { Dimensions } from '@coconut/branding';
-import { Card } from '@coconut/generic';
 import { Listing } from '@coconut/models';
 
 interface Props {
@@ -24,7 +23,7 @@ const ListingDescription = ({ listing }: Props) => {
     }
 
     return expanded || listing.data.selftext.length < 100 ? (
-        <Card onPress={onPress}>
+        <View>
             <ScrollView style={styles.scrollView}>
                 <RenderHTML
                     tagsStyles={htmlStyles.tagsStyles}
@@ -32,13 +31,12 @@ const ListingDescription = ({ listing }: Props) => {
                     source={{ html: listing.data.selftext_html }}
                 />
             </ScrollView>
-        </Card>
+            <Text onPress={onPress}>Show less</Text>
+        </View>
     ) : (
-        <Card onPress={onPress}>
-            <Text style={styles.text} numberOfLines={2}>
-                {listing.data.selftext}
-            </Text>
-        </Card>
+        <Text style={styles.text} onPress={onPress} numberOfLines={2}>
+            {listing.data.selftext}
+        </Text>
     );
 };
 

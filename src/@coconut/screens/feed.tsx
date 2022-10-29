@@ -6,7 +6,7 @@ import { FlashList, ListRenderItem } from '@shopify/flash-list';
 import { Spinner } from '@ui-kitten/components';
 
 import { useManageFeed } from '@coconut/feed';
-import { PopupMenu, SafeAreaScreen } from '@coconut/generic';
+import { SafeAreaScreen, SelectMenu } from '@coconut/generic';
 import { ListingCard } from '@coconut/listing';
 import { Listing, PostSorting } from '@coconut/models';
 
@@ -19,7 +19,7 @@ const FeedScreen = () => {
     return (
         <SafeAreaScreen>
             <View style={styles.header}>
-                <PopupMenu
+                <SelectMenu
                     data={postSortingOptions}
                     value={postSorting}
                     onChange={setPostSorting}

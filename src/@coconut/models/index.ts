@@ -7,3 +7,4 @@ export * from './message';
 export * from './comment';
 export * from './subreddit';
 export * from './search';
+export * from './types';
