@@ -3,8 +3,8 @@ import { View } from 'react-native';
 
 import { Listing } from '@coconut/models';
 
-import ListingDescription from './listingDescription';
-import ListingTitle from './listingTitle';
+import ListingDescription from './description';
+import ListingTitle from './title';
 
 interface Props {
     listing: Listing;
