@@ -138,7 +138,7 @@ export interface Listing {
     data: Data;
 }
 
-export enum PostSorting {
+export enum ListingFilter {
     HOT = 'hot',
     BEST = 'best',
     NEW = 'new',
@@ -146,6 +146,6 @@ export enum PostSorting {
 }
 
 export interface FeedFetchParams {
-    type: PostSorting;
+    type: ListingFilter;
     after?: string;
 }

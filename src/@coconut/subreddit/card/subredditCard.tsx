@@ -5,7 +5,7 @@ import { Text } from '@ui-kitten/components';
 
 import { Dimensions } from '@coconut/branding';
 import { Card } from '@coconut/generic';
-import { PostSorting, Subreddit } from '@coconut/models';
+import { ListingFilter, Subreddit } from '@coconut/models';
 import { useNavigateToSubreddit } from '@coconut/navigation';
 import { Resource, useClearResource, useFetchResource } from '@coconut/resource';
 
@@ -21,7 +21,7 @@ const SubredditCard = ({ subreddit }: Props) => {
         clearSubreddit();
         fetchSubreddit({
             subreddit: subreddit.data.display_name_prefixed,
-            type: PostSorting.HOT,
+            type: ListingFilter.HOT,
         });
         navigateToSubreddit(subreddit.data.display_name_prefixed);
     };

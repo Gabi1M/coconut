@@ -1,4 +1,4 @@
-import { PostSorting } from './listing';
+import { ListingFilter } from './listing';
 import { ThingItemKind } from './types';
 
 export interface Subreddit {
@@ -112,6 +112,6 @@ export interface Subreddit {
 
 export interface SubredditFetchParams {
     subreddit: string;
-    type: PostSorting;
+    type: ListingFilter;
     after?: string;
 }

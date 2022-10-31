@@ -1,18 +1,27 @@
-import React from 'react';
-import { SafeAreaView, StyleSheet, TouchableOpacity } from 'react-native';
-
-import { NativeStackHeaderProps } from '@react-navigation/native-stack';
+import React, { PropsWithChildren } from 'react';
+import { SafeAreaView, StyleSheet, TouchableOpacity, View } from 'react-native';
 
 import { Icon, Text, useTheme } from '@ui-kitten/components';
 
-const NavigationHeader = ({ navigation }: NativeStackHeaderProps) => {
+import { Dimensions } from '@coconut/branding';
+
+import { useNavigation } from './hooks';
+
+interface Props extends PropsWithChildren {
+    accessoryRight?: JSX.Element;
+}
+
+const NavigationHeader = ({ children, accessoryRight }: Props) => {
     const styles = useStyles();
+    const navigation = useNavigation();
     return (
         <SafeAreaView style={styles.safeArea}>
-            <TouchableOpacity style={styles.root} onPress={navigation.goBack}>
+            <TouchableOpacity style={styles.leftSection} onPress={navigation.goBack}>
                 <Icon style={styles.icon} fill='white' name='arrow-ios-back-outline' />
                 <Text style={styles.text}>Back</Text>
             </TouchableOpacity>
+            <View>{children}</View>
+            <View style={styles.rightSection}>{accessoryRight}</View>
         </SafeAreaView>
     );
 };
@@ -22,10 +31,25 @@ const useStyles = () => {
     return StyleSheet.create({
         safeArea: {
             backgroundColor: theme['color-basic-1100'],
-        },
-        root: {
             flexDirection: 'row',
             alignItems: 'center',
+            justifyContent: 'space-between',
+            marginBottom: Dimensions.ternarySpacing / 2,
+        },
+        leftSection: {
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'flex-start',
+            flex: 1,
+            marginRight: 'auto',
+        },
+        centerSection: {
+            flex: 1,
+        },
+        rightSection: {
+            flex: 1,
+            marginLeft: 'auto',
+            justifyContent: 'flex-end',
         },
         icon: {
             width: 32,

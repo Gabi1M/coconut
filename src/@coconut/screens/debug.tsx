@@ -4,6 +4,7 @@ import { FlashList, ListRenderItem } from '@shopify/flash-list';
 
 import { DebugItem, useAuthDebugItems } from '@coconut/debug';
 import { ListItem, SafeAreaScreen } from '@coconut/generic';
+import { NavigationHeader } from '@coconut/navigation';
 
 const renderItem: ListRenderItem<DebugItem> = ({ item }) => (
     <ListItem title={item.name} description={item.data} onPress={item.onPress} />
@@ -17,6 +18,7 @@ const DebugScreen = () => {
 
     return (
         <SafeAreaScreen>
+            <NavigationHeader />
             <FlashList
                 data={data}
                 renderItem={renderItem}

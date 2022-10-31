@@ -1,13 +1,11 @@
 import React from 'react';
 
-import { Text } from '@ui-kitten/components';
-
-import { Screen } from '@coconut/generic';
+import { LoadingSpinner, SafeAreaScreen } from '@coconut/generic';
 
 const SubredditsScreen = () => (
-    <Screen>
-        <Text category='h1'>SUBREDDITS</Text>
-    </Screen>
+    <SafeAreaScreen>
+        <LoadingSpinner />
+    </SafeAreaScreen>
 );
 
 export default SubredditsScreen;
