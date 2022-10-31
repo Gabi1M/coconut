@@ -1,18 +1,17 @@
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import { StyleSheet } from 'react-native';
 import { Menu, MenuOption, MenuOptions, MenuTrigger, renderers } from 'react-native-popup-menu';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { useTheme } from '@ui-kitten/components';
 
-interface Props<T extends unknown> {
+interface Props<T extends unknown> extends PropsWithChildren {
     data: T[];
-    value: T;
-    onChange: (value: T) => void;
-    labelExtractor: (value: T) => string;
+    itemRenderer: (item: T) => JSX.Element;
+    onSelect: (value: T) => void;
 }
 
-const SelectMenu = <T extends unknown>({ data, value, onChange, labelExtractor }: Props<T>) => {
+const SelectMenu = <T extends unknown>({ data, itemRenderer, onSelect, children }: Props<T>) => {
     const styles = useStyles();
 
     const menuTriggerStyles = {
@@ -27,15 +26,16 @@ const SelectMenu = <T extends unknown>({ data, value, onChange, labelExtractor }
 
     return (
         <Menu renderer={renderers.SlideInMenu}>
-            <MenuTrigger customStyles={menuTriggerStyles} text={labelExtractor(value)} />
+            <MenuTrigger customStyles={menuTriggerStyles}>{children}</MenuTrigger>
             <MenuOptions optionsContainerStyle={styles.options}>
                 {data.map((item, index) => (
                     <MenuOption
                         key={index}
                         customStyles={menuOptionStyles}
-                        text={labelExtractor(item)}
-                        onSelect={() => onChange(item)}
-                    />
+                        onSelect={() => onSelect(item)}
+                    >
+                        {itemRenderer(item)}
+                    </MenuOption>
                 ))}
             </MenuOptions>
         </Menu>
