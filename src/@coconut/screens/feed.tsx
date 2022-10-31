@@ -5,12 +5,12 @@ import { SafeAreaScreen } from '@coconut/generic';
 import { ListingList, ListingListHeader } from '@coconut/listing';
 
 const FeedScreen = () => {
-    const { feed, filter, onRefresh, setFilter } = useManageFeed();
+    const { listings, filter, isLoading, onRefresh, onFilterChange } = useManageFeed();
 
     return (
         <SafeAreaScreen>
-            <ListingListHeader filter={filter} onListingFilterChange={setFilter} />
-            <ListingList listings={feed?.data.children} onRefresh={onRefresh} />
+            <ListingListHeader filter={filter} onListingFilterChange={onFilterChange} />
+            <ListingList listings={listings} isLoading={isLoading} onRefresh={onRefresh} />
         </SafeAreaScreen>
     );
 };

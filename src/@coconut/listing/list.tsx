@@ -18,7 +18,7 @@ const renderItem: ListRenderItem<Listing> = ({ item }) => <ListingCard listing={
 const keyExtractor = (item: Listing) => item.data.name;
 
 const ListingList = ({ listings, isLoading, onRefresh }: Props) => {
-    if (isLoading === false || !listings) {
+    if (isLoading === true || !listings) {
         return <LoadingSpinner />;
     }
 
