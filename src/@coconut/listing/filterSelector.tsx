@@ -6,6 +6,7 @@ import { Icon, Text } from '@ui-kitten/components';
 import { Dimensions } from '@coconut/branding';
 import { SelectMenu } from '@coconut/generic';
 import { ListingFilter } from '@coconut/models';
+import { capitalizeFirstLetter } from '@coconut/utils';
 
 interface Props {
     filter: ListingFilter;
@@ -22,7 +23,7 @@ const availableTypes = [
 const itemRenderer = (item: ListingFilter) => (
     <View style={styles.container}>
         {FilterIconMapping[item]}
-        <Text>{item.toUpperCase()}</Text>
+        <Text style={styles.text}>{capitalizeFirstLetter(item)}</Text>
     </View>
 );
 
@@ -34,13 +35,17 @@ const ListingFilterSelector = ({ filter, onChange }: Props) => (
 
 const styles = StyleSheet.create({
     container: {
+        justifyContent: 'flex-end',
         flexDirection: 'row',
         alignItems: 'center',
+    },
+    text: {
+        fontSize: 20,
+        marginLeft: Dimensions.ternarySpacing,
     },
     icon: {
         width: 24,
         height: 24,
-        marginRight: Dimensions.ternarySpacing,
     },
 });
 

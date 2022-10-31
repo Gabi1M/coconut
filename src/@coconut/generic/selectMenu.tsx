@@ -15,7 +15,6 @@ const SelectMenu = <T extends unknown>({ data, itemRenderer, onSelect, children 
     const styles = useStyles();
 
     const menuTriggerStyles = {
-        triggerText: styles.menuTriggerText,
         triggerWrapper: styles.menuTriggerContainer,
     };
 
@@ -50,10 +49,6 @@ const useStyles = () => {
             backgroundColor: theme['color-basic-900'],
             paddingBottom: insets.bottom,
             borderRadius: 10,
-        },
-        menuTriggerText: {
-            color: theme['text-basic-color'],
-            fontSize: 20,
         },
         menuTriggerContainer: {
             padding: 5,

@@ -6,6 +6,7 @@ import CookieManager from '@react-native-cookies/cookies';
 
 import { SafeArea } from '@coconut/generic';
 import { RedditInfo } from '@coconut/info';
+import { NavigationHeader } from '@coconut/navigation';
 import { Resource, useFetchResource } from '@coconut/resource';
 
 const LoginWebviewScreen = () => {
@@ -35,6 +36,7 @@ const LoginWebviewScreen = () => {
 
     return (
         <SafeArea>
+            <NavigationHeader />
             <WebView
                 incognito={true}
                 style={styles.root}
