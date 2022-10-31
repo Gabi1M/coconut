@@ -2,10 +2,14 @@ import React from 'react';
 
 import { FlashList, ListRenderItem } from '@shopify/flash-list';
 
-import { ListItem, SafeAreaScreen } from '@coconut/generic';
+import { ListItem, LoadingSpinner, NoContent, SafeAreaScreen } from '@coconut/generic';
 import { ListingCard } from '@coconut/listing';
 import { Listing, Subreddit, Thing, ThingItemKind } from '@coconut/models';
-import { Resource, useSelectResourceFetchData } from '@coconut/resource';
+import {
+    Resource,
+    useSelectResourceFetchData,
+    useSelectResourceFetchInLoadingState,
+} from '@coconut/resource';
 import { SearchBar } from '@coconut/search';
 import { SubredditCard } from '@coconut/subreddit';
 
@@ -25,18 +29,35 @@ const SearchScreen = () => {
     const searchResults = useSelectResourceFetchData(Resource.SEARCH) as
         | Thing<Subreddit | Listing>
         | undefined;
+    const isLoading = useSelectResourceFetchInLoadingState(Resource.SEARCH);
+
+    if (isLoading) {
+        return (
+            <SafeAreaScreen>
+                <SearchBar />
+                <LoadingSpinner />
+            </SafeAreaScreen>
+        );
+    }
+
+    if (!searchResults) {
+        return (
+            <SafeAreaScreen>
+                <SearchBar />
+                <NoContent message='Nothing to show just yet' />
+            </SafeAreaScreen>
+        );
+    }
 
     return (
         <SafeAreaScreen>
             <SearchBar />
-            {searchResults ? (
-                <FlashList
-                    data={searchResults.data.children}
-                    renderItem={renderItem}
-                    keyExtractor={keyExtractor}
-                    estimatedItemSize={50}
-                />
-            ) : null}
+            <FlashList
+                data={searchResults.data.children}
+                renderItem={renderItem}
+                keyExtractor={keyExtractor}
+                estimatedItemSize={50}
+            />
         </SafeAreaScreen>
     );
 };

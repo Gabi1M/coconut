@@ -2,7 +2,7 @@ import React from 'react';
 
 import { FlashList, ListRenderItem } from '@shopify/flash-list';
 
-import { LoadingSpinner, SafeAreaScreen } from '@coconut/generic';
+import { LoadingSpinner, NoContent, SafeAreaScreen } from '@coconut/generic';
 import { MessageCard, useManageInbox } from '@coconut/messages';
 import { Message } from '@coconut/models';
 
@@ -10,10 +10,22 @@ const renderItem: ListRenderItem<Message> = ({ item }) => <MessageCard message={
 const keyExtractor = (item: Message) => item.data.name;
 
 const InboxScreen = () => {
-    const { messages, onRefresh } = useManageInbox();
+    const { messages, isLoading, onRefresh } = useManageInbox();
 
-    if (!messages) {
-        return <LoadingSpinner />;
+    if (isLoading || !messages) {
+        return (
+            <SafeAreaScreen>
+                <LoadingSpinner />
+            </SafeAreaScreen>
+        );
+    }
+
+    if (!messages.data.children.length) {
+        return (
+            <SafeAreaScreen>
+                <NoContent />
+            </SafeAreaScreen>
+        );
     }
 
     return (

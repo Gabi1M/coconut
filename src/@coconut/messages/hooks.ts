@@ -1,10 +1,16 @@
 import React, { useEffect } from 'react';
 
 import { Message, Thing } from '@coconut/models';
-import { Resource, useFetchResource, useSelectResourceFetchData } from '@coconut/resource';
+import {
+    Resource,
+    useFetchResource,
+    useSelectResourceFetchData,
+    useSelectResourceFetchInLoadingState,
+} from '@coconut/resource';
 
 export const useManageInbox = () => {
     const messages = useSelectResourceFetchData(Resource.MESSAGES) as Thing<Message> | undefined;
+    const isLoading = useSelectResourceFetchInLoadingState(Resource.MESSAGES);
     const fetchMessages = useFetchResource(Resource.MESSAGES);
 
     useEffect(() => {
@@ -18,6 +24,7 @@ export const useManageInbox = () => {
 
     return {
         messages,
+        isLoading,
         onRefresh,
     };
 };

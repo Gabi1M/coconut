@@ -2,11 +2,10 @@ import React from 'react';
 
 import { FlashList, ListRenderItem } from '@shopify/flash-list';
 
-import { LoadingSpinner } from '@coconut/generic';
+import { LoadingSpinner, NoContent } from '@coconut/generic';
 import { Listing } from '@coconut/models';
 
 import { ListingCard } from './card';
-import NoListings from './noListings';
 
 interface Props {
     listings: Listing[] | undefined;
@@ -23,7 +22,7 @@ const ListingList = ({ listings, isLoading, onRefresh }: Props) => {
     }
 
     if (!listings.length) {
-        return <NoListings />;
+        return <NoContent />;
     }
 
     return (
